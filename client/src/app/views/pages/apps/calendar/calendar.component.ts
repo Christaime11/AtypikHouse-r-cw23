@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 
-import { CalendarOptions, DateSelectArg, EventClickArg, EventApi } from '@fullcalendar/angular';
+import {CalendarOptions, DateSelectArg, EventClickArg, EventApi, FullCalendarComponent} from '@fullcalendar/angular';
 import { Draggable } from '@fullcalendar/interaction'; // for dateClick
 import { INITIAL_EVENTS, createEventId } from './event-utils';
 
@@ -13,17 +13,21 @@ export class CalendarComponent implements OnInit {
 
   @ViewChild('externalEvents', {static: true}) externalEvents: ElementRef;
 
+  // @ts-ignore
+  myDate = new Date();
+  myDatePlusOneMonth = new Date(this.myDate.setMonth(this.myDate.getMonth() + 1)) ;
+
   calendarOptions: CalendarOptions = {
     headerToolbar: {
       left: 'prev,today,next',
       center: 'title',
-      right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
+      right: null,
     },
     initialView: 'dayGridMonth',
     initialEvents: INITIAL_EVENTS, // alternatively, use the `events` setting to fetch from a feed
     weekends: true,
-    editable: true,
-    selectable: true,
+    editable: false,
+    selectable: false,
     selectMirror: true,
     dayMaxEvents: true,
     select: this.handleDateSelect.bind(this),
@@ -35,11 +39,39 @@ export class CalendarComponent implements OnInit {
     eventRemove:
     */
   };
+
+  calendar2Options: CalendarOptions = {
+    headerToolbar: {
+      left: 'prev,today,next',
+      center: 'title',
+      right: null,
+    },
+    initialView: 'dayGridMonth',
+    initialEvents: INITIAL_EVENTS, // alternatively, use the `events` setting to fetch from a feed
+    weekends: true,
+    initialDate:  this.myDatePlusOneMonth,
+    editable: false,
+    selectable: false,
+    selectMirror: true,
+    dayMaxEvents: true,
+    select: this.handleDateSelect.bind(this),
+    eventClick: this.handleEventClick.bind(this),
+    eventsSet: this.handleEvents.bind(this)
+    /* you can update a remote database when these fire:
+    eventAdd:
+    eventChange:
+    eventRemove:
+    */
+  };
+  
   currentEvents: EventApi[] = [];
 
-  constructor() { }
+  constructor()   {
+
+  }
 
   ngOnInit(): void {
+    console.log(this.myDatePlusOneMonth);
 
     // For external-events dragging
     new Draggable(this.externalEvents.nativeElement, {
@@ -52,7 +84,6 @@ export class CalendarComponent implements OnInit {
         };
       }
     });
-
   }
 
 
