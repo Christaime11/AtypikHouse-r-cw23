@@ -1,0 +1,161 @@
+<div class="horizontal-menu">
+  <nav class="navbar top-navbar">
+    <div class="container">
+      <div class="navbar-content">
+
+        <!-- Logo -->
+         <a class="navbar-brand" routerLink="/">
+           Atypik<span>House</span>
+         </a>
+
+        <ul class="navbar-nav ml-4 mr-auto d-none d-lg-flex">
+          <ng-container *ngFor="let item of menuItems">
+            <li *ngIf="!item.isMegaMenu" [routerLinkActive]="['active']" class="nav-item">
+              <a *ngIf="!hasItems(item)" [routerLink]="item.link" class="nav-link">
+                <i *ngIf="item.icon" [attr.data-feather]="item.icon" appFeatherIcon class="link-icon"></i>
+                <span class="menu-title">{{ item.label }}</span>
+              </a>
+              <a *ngIf="hasItems(item)" class="nav-link" href="javascript:void(0);">
+                <i *ngIf="item.icon" [attr.data-feather]="item.icon" appFeatherIcon class="link-icon"></i>
+                <span class="menu-title">{{ item.label }}</span>
+                <i class="link-arrow"></i>
+              </a>
+              <div *ngIf="hasItems(item)" class="submenu">
+
+                <ul *ngFor="let subMenu of item.subMenus" class="submenu-item">
+                  <ng-container *ngFor="let subMenuItem of subMenu.subMenuItems">
+                    <li *ngIf="subMenuItem.isTitle" class="category-heading">{{ subMenuItem.label }}</li>
+
+                    <li *ngIf="!subMenuItem.isTitle" class="nav-item">
+                      <a [routerLinkActive]="['active']" [routerLink]="subMenuItem.link"
+                         class="nav-link">{{ subMenuItem.label }}</a>
+                      <span *ngIf="subMenuItem.badge"
+                            class="badge badge-{{subMenuItem.badge.variant}}">{{subMenuItem.badge.text}}</span>
+                    </li>
+                  </ng-container>
+                </ul>
+
+              </div>
+            </li>
+          </ng-container>
+
+        </ul>
+
+         <ul class="navbar-nav ml-auto">
+           <li class="nav-item nav-profile" ngbDropdown>
+             <a class="nav-link" id="profileDropdown" ngbDropdownToggle>
+               <img alt="profile" src="https://via.placeholder.com/30x30">
+             </a>
+             <div aria-labelledby="profileDropdown" ngbDropdownMenu>
+               <div class="dropdown-header d-flex flex-column align-items-center">
+                 <div class="figure mb-3">
+                   <img alt="" src="https://via.placeholder.com/80x80">
+                 </div>
+                 <div class="info text-center">
+                   <p class="name font-weight-bold mb-0">{{UserProfile?.name}}</p>
+                   <p class="email text-muted mb-3">{{UserProfile?.email}}</p>
+                 </div>
+               </div>
+               <div class="dropdown-body">
+                 <ul class="profile-nav p-0 pt-3">
+                   <li class="nav-item">
+                     <a class="nav-link" routerLink="/general/profile">
+                       <i class="feather icon-user"></i>
+                       <span>Profile</span>
+                     </a>
+                   </li>
+                   <li class="nav-item">
+                     <a (click)="false" class="nav-link" href="">
+                       <i class="feather icon-edit"></i>
+                       <span>Edit Profile</span>
+                     </a>
+                   </li>
+                   <li class="nav-item">
+                     <a (click)="onLogout($event)" class="nav-link" href="">
+                       <i class="feather icon-log-out"></i>
+                       <span>Log Out</span>
+                     </a>
+                   </li>
+                 </ul>
+               </div>
+             </div>
+           </li>
+         </ul>
+
+         <button (click)="toggleHeaderMenu()" class="navbar-toggler navbar-toggler-right d-lg-none align-self-center"
+                 type="button">
+           <i data-feather="menu"></i>
+         </button>
+
+       </div>
+     </div>
+   </nav>
+
+   <nav class="bottom-navbar d-lg-none">
+     <div class="container">
+
+       <!-- Menu -->
+       <ul class="nav page-navigation py-3">
+         <ng-container *ngFor="let item of menuItems">
+
+           <li *ngIf="!item.isMegaMenu" [routerLinkActive]="['active']" class="nav-item">
+             <a *ngIf="!hasItems(item)" [routerLink]="item.link" class="nav-link">
+               <i *ngIf="item.icon" [attr.data-feather]="item.icon" appFeatherIcon class="link-icon"></i>
+               <span class="menu-title">{{ item.label }}</span>
+             </a>
+             <a *ngIf="hasItems(item)" class="nav-link" href="javascript:void(0);">
+               <i *ngIf="item.icon" [attr.data-feather]="item.icon" appFeatherIcon class="link-icon"></i>
+               <span class="menu-title">{{ item.label }}</span>
+               <i class="link-arrow"></i>
+             </a>
+             <div *ngIf="hasItems(item)" class="submenu">
+
+               <ul *ngFor="let subMenu of item.subMenus" class="submenu-item">
+                 <ng-container *ngFor="let subMenuItem of subMenu.subMenuItems">
+                   <li *ngIf="subMenuItem.isTitle" class="category-heading">{{ subMenuItem.label }}</li>
+
+                   <li *ngIf="!subMenuItem.isTitle" class="nav-item">
+                     <a [routerLinkActive]="['active']" [routerLink]="subMenuItem.link"
+                        class="nav-link">{{ subMenuItem.label }}</a>
+                     <span *ngIf="subMenuItem.badge"
+                           class="badge badge-{{subMenuItem.badge.variant}}">{{subMenuItem.badge.text}}</span>
+                   </li>
+                 </ng-container>
+               </ul>
+
+             </div>
+           </li>
+
+           <li *ngIf="item.isMegaMenu" [routerLinkActive]="['active']" class="nav-item mega-menu">
+             <a class="nav-link" href="javascript:void(0);">
+               <i *ngIf="item.icon" [attr.data-feather]="item.icon" appFeatherIcon class="link-icon"></i>
+               <span class="menu-title">{{ item.label }}</span>
+               <i class="link-arrow"></i>
+             </a>
+             <div class="submenu">
+               <div class="row">
+                 <div *ngFor="let subMenu of item.subMenus" class="col-md-3">
+                   <ul class="submenu-item">
+                     <ng-container *ngFor="let subMenuItem of subMenu.subMenuItems">
+
+                       <li *ngIf="subMenuItem.isTitle" class="category-heading">{{ subMenuItem.label }}</li>
+
+                       <li *ngIf="!subMenuItem.isTitle" class="nav-item">
+                         <a [routerLinkActive]="['active']" [routerLink]="subMenuItem.link"
+                            class="nav-link">{{ subMenuItem.label }}</a>
+                       </li>
+
+                     </ng-container>
+                   </ul>
+                 </div>
+               </div>
+             </div>
+           </li>
+         </ng-container>
+
+       </ul>
+     </div>
+   </nav>
+
+ </div>
+
