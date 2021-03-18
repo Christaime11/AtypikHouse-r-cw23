@@ -1,4 +1,10 @@
 import { Injectable } from '@angular/core';
+import { environment } from 'src/environments/environment';
+import { AuthService } from './auth.service';
+
+import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
+
 
 @Injectable({
   providedIn: 'root'
@@ -7,11 +13,44 @@ import { Injectable } from '@angular/core';
 export class TokenService {
 
   private issuer = {
-    login: 'http://127.0.0.1:8000/api/login',
-    register: 'http://127.0.0.1:8000/api/register'
+    login: environment.loginApiURL,
+    register: environment.registerApiUrl
   };
+  
+  error: any;
+  canGetData: boolean;
+  UserProfile: any;
 
-  constructor() { }
+  constructor(
+    private http: HttpClient,
+    private router: Router
+  ) { }
+
+  protected  baseUrl: string = environment.apiURL;
+
+
+  /*
+   * Verify if user data can be retrieved from the api. On this function depends the CanActivate auth guard.
+   */
+  canGetuserData(){
+    this.http.get(this.baseUrl + 'users/user-profile').subscribe(
+      data => {
+        this.UserProfile = data;
+      },
+      err => {
+        this.error = err.status;
+        if (this.UserProfile) {
+          localStorage.setItem('canGetData', 'true');
+          this.canGetData = true;
+        } else {
+          localStorage.setItem('canGetData', 'false');
+          localStorage.removeItem('access_token');
+          this.canGetData = false;
+        }
+      }, () => {
+        console.log("this.canGetData = " + this.canGetData)
+      });
+  }
 
   // tslint:disable-next-line:typedef
   handleData(token){
@@ -41,17 +80,26 @@ export class TokenService {
      } else {
         return false;
      }
+
   }
 
   // User state based on valid token
   // tslint:disable-next-line:typedef
   isLoggedIn() {
+    this.canGetuserData();
     // return this.isValidToken();
-    if (localStorage.getItem('access_token')) {
+
+    if (this.canGetData = true) {
       return true;
     } else {
       return false;
     }
+
+    /*if (localStorage.getItem("access_token")) {
+      return true;
+    } else {
+      return false;
+    }*/
   }
 
   // Remove token

@@ -5,6 +5,7 @@ import { AuthService } from './../../../core/auth/auth.service';
 
 import { MENU } from './menu';
 import { MenuItem } from './menu.model';
+import { AuthStateService } from 'src/app/core/auth/auth-state.service';
 
 @Component({
   selector: 'app-navbar',
@@ -16,6 +17,7 @@ export class NavbarComponent implements OnInit {
   menuItems = [];
   private UserProfile: any;
   public isMenuCollapsed = true;
+  error: any;
   /**
    * Fixed header menu on scroll
    */
@@ -32,8 +34,10 @@ export class NavbarComponent implements OnInit {
 
   constructor(
     @Inject(DOCUMENT) private document: Document,
-    private renderer: Renderer2,
     private router: Router,
+
+    private renderer: Renderer2,
+    private authstate: AuthStateService,
     private authService: AuthService
   ) { }
 
@@ -52,12 +56,19 @@ export class NavbarComponent implements OnInit {
     }
 
     /**
-     * User profile data
+     * User profile data . If can't retrieve data : logout.
      */
     this.authService.profileUser().subscribe(
       data => {
         this.UserProfile = data.user;
-      });
+      }/*,
+      err => {
+        this.error = err.status;
+        if (this.error != 200) {
+          this.authstate.setAuthState(false);
+          this.router.navigate(['/auth/login']);
+        }
+      }*/);
   }
 
   /**
