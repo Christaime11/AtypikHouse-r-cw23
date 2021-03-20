@@ -39,9 +39,9 @@ export class LoginComponent implements OnInit {
   onSubmit() {
     this.authService.signin(this.loginForm.value).subscribe(
       result => {
-        this.success = result.success;
-        this.responseHandler(result);
-        console.log('authentication successful');
+        this.success = result;
+        this.responseHandler(result.token);
+        console.log('authentication successful ' + result.token);
         localStorage.setItem('isLoggedin', 'true');
       },
       res => {
@@ -60,7 +60,7 @@ export class LoginComponent implements OnInit {
   // Handle response
   // tslint:disable-next-line:typedef
   responseHandler(data){
-    this.token.handleData(data.access_token);
+    this.token.handleData(data);
   }
 
 }
