@@ -3,15 +3,28 @@ import { Routes, RouterModule } from '@angular/router';
 import { BaseComponent } from './views/layout/base/base.component';
 import { AuthGuard } from './core/guard/auth.guard';
 import { ErrorPageComponent } from './views/pages/error-page/error-page.component';
+import { HomeComponent } from './views/pages/public/home/home.component';
+import { HabitatsComponent } from './views/pages/public/habitats/habitats.component';
 
 
 const routes: Routes = [
+ // { path:'', loadChildren: () => import('./views/pages/general/home/home.component').then(m => m.HomeComponent) },
+  
   { path:'auth', loadChildren: () => import('./views/pages/auth/auth.module').then(m => m.AuthModule) },
+ 
+  { path: '', component: BaseComponent,
+    children:[ 
+      { path: '', component: HomeComponent},
+      { path: 'habitats', component: HabitatsComponent},
+    ] 
+  },
+
   {
     path: '',
     component: BaseComponent,
     canActivate: [AuthGuard],
     children: [
+      
       {
         path: 'dashboard',
         loadChildren: () => import('./views/pages/dashboard/dashboard.module').then(m => m.DashboardModule)
@@ -49,10 +62,10 @@ const routes: Routes = [
         path: 'general',
         loadChildren: () => import('./views/pages/general/general.module').then(m => m.GeneralModule)
       },
-      { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
       // { path: '**', redirectTo: 'dashboard', pathMatch: 'full' }
     ]
   },
+
   {
     path: 'error',
     component: ErrorPageComponent,

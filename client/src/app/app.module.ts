@@ -15,6 +15,7 @@ import {ReactiveFormsModule} from '@angular/forms';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {RouterModule} from '@angular/router';
 import { AuthInterceptor } from './core/auth/auth.interceptor';
+import { HabitatsComponent } from './views/pages/public/habitats/habitats.component';
 
 
 // @ts-ignore
@@ -22,6 +23,7 @@ import { AuthInterceptor } from './core/auth/auth.interceptor';
   declarations: [
     AppComponent,
     ErrorPageComponent,
+    HabitatsComponent,
   ],
   imports: [
     BrowserModule,
@@ -31,7 +33,7 @@ import { AuthInterceptor } from './core/auth/auth.interceptor';
     BrowserModule,
     RouterModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   providers: [
     AuthGuard,

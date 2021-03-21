@@ -1,5 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { WizardComponent as BaseWizardComponent } from 'angular-archwizard';
+import { AuthService } from 'src/app/core/auth/auth.service';
 
 @Component({
   selector: 'app-register',
@@ -8,17 +11,115 @@ import { Router } from '@angular/router';
 })
 export class RegisterComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  validationForm1: FormGroup;
+  validationForm2: FormGroup;
+
+  isForm1Submitted: Boolean;
+  isForm2Submitted: Boolean;
+
+  @ViewChild('wizardForm') wizardForm: BaseWizardComponent;
+  errors: any;
+  success: any;
+  display:boolean = true;
+
+  constructor(
+    public formBuilder: FormBuilder,
+    public authService: AuthService,
+    private router: Router) { }
 
   ngOnInit(): void {
+    
+    /**
+     * form1 value validation
+     */
+     this.validationForm1 = this.formBuilder.group({
+      name : ['', Validators.required],
+      email : ['', [Validators.required, Validators.email]],
+      telephone : ['', Validators.required],
+    });
+
+    /**
+     * formw value validation
+     */
+    this.validationForm2 = this.formBuilder.group({
+      adresse : ['', Validators.required],
+      password : ['', Validators.required],
+      password_confirmation : ['', Validators.required]
+    });
+
+    this.isForm1Submitted = false;
+    this.isForm2Submitted = false;
+
   }
 
-  onRegister(e) {
-    e.preventDefault();
-    localStorage.setItem('isLoggedin', 'true');
-    if (localStorage.getItem('isLoggedin')) {
-      this.router.navigate(['/']);
+  /**
+   * Wizard finish function
+   */
+  finishFunction() {
+    alert('Successfully Completed');
+  }
+
+  /**
+   * Returns form
+   */
+  get form1() {
+    return this.validationForm1.controls;
+  }
+
+  /**
+   * Returns form
+   */
+  get form2() {
+    return this.validationForm2.controls;
+  }
+
+  /**
+   * Go to next step while form value is valid
+   */
+  form1Submit() {
+    if(this.validationForm1.valid) {
+      this.wizardForm.goToNextStep();
     }
+    this.isForm1Submitted = true;
+  }
+
+  /**
+   * Go to next step while form value is valid
+   */
+ 
+
+  getData(){
+    var merged = Object.assign(this.validationForm1.value, this.validationForm2.value);
+    console.log(merged);
+    return merged;
+  }
+
+  form2Submit() {
+    if(this.validationForm2.valid) {
+     this.authService.register(this.getData()).subscribe(
+        result => {
+          this.success = result.success;
+          this.display = false;
+        },
+        error => {
+          this.errors = error.error.error;
+          console.log(this.errors);
+        },
+        () => {
+          this.wizardForm.goToNextStep();
+          /*this.validationForm1.reset();
+          setTimeout(() => {
+            this.router.navigate(['login']);
+          }, 2000);*/
+        }
+      );
+    }
+    this.isForm2Submitted = true;
+    
+  }
+
+  goToLogin(){
+    this.router.navigate(['auth/login'])
   }
 
 }

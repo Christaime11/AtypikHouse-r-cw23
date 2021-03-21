@@ -35,7 +35,7 @@ export class WizardComponent implements OnInit {
      * formw value validation
      */
     this.validationForm2 = this.formBuilder.group({
-      email : ['', [Validators.required, Validators.email]],
+      email : ['', [Validators.required, Validators.email, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]],
       mobileNumber : ['', Validators.required],
       password : ['', Validators.required]
     });

@@ -24,7 +24,7 @@ export class NavbarComponent implements OnInit {
   @HostListener('window:scroll', ['$event']) getScrollHeight(event) {
     if (window.matchMedia('(min-width: 992px)').matches) {
       let header: HTMLElement = document.querySelector('.horizontal-menu') as HTMLElement;
-      if(window.pageYOffset >= 60) {
+      if(window.pageYOffset >= 61) {
         header.parentElement.classList.add('fixed-on-scroll')
       } else {
         header.parentElement.classList.remove('fixed-on-scroll')
