@@ -96,6 +96,7 @@ export class NavbarComponent implements OnInit {
    * Logout
    */
   onLogout(e) {
+    this.authstate.setAuthState(false);
     this.authService.onLogout(e);
   }
 

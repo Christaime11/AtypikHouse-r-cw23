@@ -43,12 +43,12 @@ export class AuthService {
    */
   onLogout(e) {
     e.preventDefault();
-    localStorage.removeItem('isLoggedin');
+    localStorage.removeItem('access_token')
 
-    if (!localStorage.getItem('isLoggedin')) {
-      localStorage.removeItem('access_token');
-      this.router.navigate(['']);
+    if (!localStorage.getItem('access_token')) {
+      this.router.navigate(['/']);
     }
+   
   }
 
   // Access user profile
