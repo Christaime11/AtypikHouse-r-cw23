@@ -2,157 +2,157 @@
   <div class="col-md-8 col-xl-6 mx-auto">
     <div class="card">
       <div class="row">
-        <div class="col-md-12">
+
+        <div class="col-md-4 pr-md-0">
+          <div class="auth-left-wrapper">
+
+          </div>
+        </div>
+
+        <div class="col-md-8 pl-md-0">
           <div class="auth-form-wrapper px-4 py-5">
             <a routerLink="." class="noble-ui-logo d-block mb-2">Atypik<span>House</span></a>
             <h5 class="text-muted font-weight-normal mb-4">Créez un compte gratuit.</h5>
-            <div class="card">
-              <div class="card-body">
-
-                <div *ngIf="display">
-                    <!-- Errors -->
-                  <div *ngIf="errors?.name" class="alert alert-danger mt-3">
-                    {{ errors?.name }}
-                  </div>
-                  <div *ngIf="errors?.email" class="alert alert-danger mt-3">
-                    {{ errors.email }}
-                  </div>
-                  <div *ngIf="errors?.password" class="alert alert-danger mt-3">
-                    {{ errors?.password }}
-                  </div>
-                  <div *ngIf="errors?.password_confirmation" class="alert alert-danger mt-3">
-                    {{ errors?.password_confirmation }}
-                  </div>
-                </div>
-                
-                
-                <aw-wizard #wizardForm>
-
-                  <aw-wizard-step stepTitle="étape 1">
-
-                    <form (ngSubmit)="form1Submit()" [formGroup]="validationForm1">
 
 
-                      <div class="form-group row">
-                        <label for="name" class="col-sm-3 col-form-label">Nom et Prénom</label>
-                        <div class="col-sm-9">
-                          <input type="text" class="form-control" id="name" formControlName="name"
-                            [ngClass]="{'is-invalid': isForm1Submitted && form1.name.errors}"
-                            placeholder="Nom et Prénom">
-
-                          <div *ngIf="isForm1Submitted && form1.name.errors?.required" class="invalid-feedback">
-                            Requis
-                          </div>
-
-                        </div>
-                      </div>
-
-                      <div class="form-group row">
-                        <label for="email" class="col-sm-3 col-form-label">Email</label>
-                        <div class="col-sm-9">
-                          <input type="email" class="form-control" id="email" formControlName="email"
-                            [ngClass]="{'is-invalid': isForm1Submitted && form1.email.errors}" placeholder="Email">
-                          <div *ngIf="isForm1Submitted && form1.email.errors?.required" class="invalid-feedback">
-                            Requis
-                          </div>
-                        </div>
-                      </div>
-
-
-                      <div class="form-group row">
-                        <label for="telephone" class="col-sm-3 col-form-label">Téléphone</label>
-                        <div class="col-sm-9">
-                          <input type="text" class="form-control" id="telephone" formControlName="telephone"
-                            [ngClass]="{'is-invalid': isForm1Submitted && form1.telephone.errors}"
-                            placeholder="Téléphone">
-                          <div *ngIf="isForm1Submitted && form1.telephone.errors?.required" class="invalid-feedback">
-                            Requis
-                          </div>
-                        </div>
-                      </div>
-
-
-
-                      <div class="d-flex justify-content-center mt-2">
-                        <button class="btn btn-primary" type="submit">Continuer</button>
-                      </div>
-
-                    </form>
-
-                  </aw-wizard-step>
-
-                  <aw-wizard-step stepTitle="étape 2">
-
-                    <form (ngSubmit)="form2Submit()" [formGroup]="validationForm2">
-
-                      <div class="form-group row">
-                        <label for="adresse" class="col-sm-3 col-form-label">Adresse</label>
-                        <div class="col-sm-9">
-                          <input type="text" class="form-control" id="adresse" formControlName="adresse"
-                            [ngClass]="{'is-invalid': isForm2Submitted && form2.adresse.errors}" placeholder="Adresse">
-                          <div *ngIf="isForm2Submitted && form2.adresse.errors?.required" class="invalid-feedback">
-                            Requis
-                          </div>
-                        </div>
-                      </div>
-
-
-                      <div class="form-group row">
-                        <label for="password" class="col-sm-3 col-form-label">Mot de passe</label>
-                        <div class="col-sm-9">
-                          <input type="password" class="form-control" id="password" formControlName="password"
-                            [ngClass]="{'is-invalid': isForm2Submitted && form2.password.errors}"
-                            placeholder="Password">
-                          <div *ngIf="isForm2Submitted && form2.password.errors?.required" class="invalid-feedback">
-                            Requis
-                          </div>
-                        </div>
-                      </div>
-
-                      <div class="form-group row">
-                        <label for="password_confirmation" class="col-sm-3 col-form-label">Confirmation MDP</label>
-                        <div class="col-sm-9">
-                          <input type="password" class="form-control" id="password_confirmation"
-                            formControlName="password_confirmation"
-                            [ngClass]="{'is-invalid': isForm2Submitted && form2.password_confirmation.errors}"
-                            placeholder="Password">
-                          <div *ngIf="isForm2Submitted && form2.password_confirmation.errors?.required"
-                            class="invalid-feedback">
-                            Requis
-                          </div>
-                        </div>
-                      </div>
-
-                      <div class="d-flex justify-content-center mt-2">
-                        <button class="btn btn-light mr-2" type="button" awPreviousStep>Back</button>
-                        <button class="btn btn-primary" type="submit">Continue</button>
-                      </div>
-
-                    </form>
-
-                  </aw-wizard-step>
-
-                  <aw-wizard-step stepTitle="validé">
-
-                    <div class="text-center mt-5">
-                      <i data-feather="check-circle" appFeatherIcon class="text-success mt-4 mb-2 icon-xxl"></i>
-                      <h3 class="text-muted mb-3">Création du compte réussi !</h3>
-                      <p class="w-75 mx-auto mb-4 text-muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Integer ut nulla nunc. Maecenas arcu sem, hendrerit a tempor quis, sagittis accumsan tellus. In
-                        hac habitasse platea dictumst</p>
-                    </div>
-
-                    <div class="d-flex justify-content-center mt-2">
-                      <!-- <button class="btn btn-light mr-2" type="button" awPreviousStep>Back</button> -->
-                      <button class="btn btn-success" type="button" (click)="goToLogin()">Se connecter</button>
-                    </div>
-
-                  </aw-wizard-step>
-
-                </aw-wizard>
-
+            <div *ngIf="display">
+              <!-- Errors -->
+              <div *ngIf="errors?.name" class="alert alert-danger mt-3">
+                {{ errors?.name }}
+              </div>
+              <div *ngIf="errors?.email" class="alert alert-danger mt-3">
+                {{ errors.email }}
+              </div>
+              <div *ngIf="errors?.password" class="alert alert-danger mt-3">
+                {{ errors?.password }}
+              </div>
+              <div *ngIf="errors?.password_confirmation" class="alert alert-danger mt-3">
+                {{ errors?.password_confirmation }}
               </div>
             </div>
+
+            <aw-wizard #wizardForm>
+
+              <aw-wizard-step stepTitle="étape 1">
+
+                <form class='mt-4' (ngSubmit)="form1Submit()" [formGroup]="validationForm1">
+
+
+                  <div class="form-group">
+                    <label for="name">Nom et Prénom</label>
+
+                    <input type="text" class="form-control" id="name" formControlName="name"
+                      [ngClass]="{'is-invalid': isForm1Submitted && form1.name.errors}" placeholder="Nom et Prénom">
+
+                    <div *ngIf="isForm1Submitted && form1.name.errors?.required" class="invalid-feedback">
+                      Requis
+                    </div>
+
+
+                  </div>
+
+                  <div class="form-group">
+                    <label for="email">Email</label>
+
+                    <input type="email" class="form-control" id="email" formControlName="email"
+                      [ngClass]="{'is-invalid': isForm1Submitted && form1.email.errors}" placeholder="Email">
+                    <div *ngIf="isForm1Submitted && form1.email.errors?.required" class="invalid-feedback">
+                      Requis
+                    </div>
+
+                  </div>
+
+
+                  <div class="form-group">
+                    <label for="telephone">Téléphone</label>
+
+                    <input type="text" class="form-control" id="telephone" formControlName="telephone"
+                      [ngClass]="{'is-invalid': isForm1Submitted && form1.telephone.errors}" placeholder="Téléphone">
+                    <div *ngIf="isForm1Submitted && form1.telephone.errors?.required" class="invalid-feedback">
+                      Requis
+                    </div>
+
+                  </div>
+
+
+
+                  <div class="d-flex justify-content-center mt-4">
+                    <button class="btn btn-primary" type="submit">Continuer</button>
+                  </div>
+
+                </form>
+
+              </aw-wizard-step>
+
+              <aw-wizard-step stepTitle="étape 2">
+
+                <form class='mt-4' (ngSubmit)="form2Submit()" [formGroup]="validationForm2">
+
+                  <div class="form-group">
+                    <label for="adresse">Adresse</label>
+
+                    <input type="text" class="form-control" id="adresse" formControlName="adresse"
+                      [ngClass]="{'is-invalid': isForm2Submitted && form2.adresse.errors}" placeholder="Adresse">
+                    <div *ngIf="isForm2Submitted && form2.adresse.errors?.required" class="invalid-feedback">
+                      Requis
+                    </div>
+
+                  </div>
+
+
+                  <div class="form-group">
+                    <label for="password">Mot de passe</label>
+
+                    <input type="password" class="form-control" id="password" formControlName="password"
+                      [ngClass]="{'is-invalid': isForm2Submitted && form2.password.errors}" placeholder="Password">
+                    <div *ngIf="isForm2Submitted && form2.password.errors?.required" class="invalid-feedback">
+                      Requis
+                    </div>
+
+                  </div>
+
+                  <div class="form-group">
+                    <label for="password_confirmation">Confirmation MDP</label>
+
+                    <input type="password" class="form-control" id="password_confirmation"
+                      formControlName="password_confirmation"
+                      [ngClass]="{'is-invalid': isForm2Submitted && form2.password_confirmation.errors}"
+                      placeholder="Password">
+                    <div *ngIf="isForm2Submitted && form2.password_confirmation.errors?.required"
+                      class="invalid-feedback">
+                      Requis
+                    </div>
+
+                  </div>
+
+                  <div class="d-flex justify-content-center mt-2">
+                    <button class="btn btn-light mr-2" type="button" awPreviousStep>Back</button>
+                    <button class="btn btn-primary" type="submit">Continue</button>
+                  </div>
+
+                </form>
+
+              </aw-wizard-step>
+
+              <aw-wizard-step stepTitle="validé">
+
+                <div class="text-center mt-5">
+                  <i data-feather="check-circle" appFeatherIcon class="text-success mt-4 mb-2 icon-xxl"></i>
+                  <h3 class="text-muted mb-3">Création du compte réussi !</h3>
+                  <p class="w-75 mx-auto mb-4 text-muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    Integer ut nulla nunc. Maecenas arcu sem, hendrerit a tempor quis, sagittis accumsan tellus. In
+                    hac habitasse platea dictumst</p>
+                </div>
+
+                <div class="d-flex justify-content-center mt-2">
+                  <!-- <button class="btn btn-light mr-2" type="button" awPreviousStep>Back</button> -->
+                  <button class="btn btn-success" type="button" (click)="goToLogin()">Se connecter</button>
+                </div>
+
+              </aw-wizard-step>
+
+            </aw-wizard>
+
 
           </div>
         </div>

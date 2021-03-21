@@ -47,7 +47,7 @@ export class AuthService {
 
     if (!localStorage.getItem('isLoggedin')) {
       localStorage.removeItem('access_token');
-      this.router.navigate(['/auth/login']);
+      this.router.navigate(['']);
     }
   }
 

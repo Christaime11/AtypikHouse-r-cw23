@@ -53,13 +53,6 @@ export class RegisterComponent implements OnInit {
   }
 
   /**
-   * Wizard finish function
-   */
-  finishFunction() {
-    alert('Successfully Completed');
-  }
-
-  /**
    * Returns form
    */
   get form1() {
@@ -74,7 +67,7 @@ export class RegisterComponent implements OnInit {
   }
 
   /**
-   * Go to next step while form value is valid
+   * Go to next step 2 while form value is valid
    */
   form1Submit() {
     if(this.validationForm1.valid) {
@@ -84,10 +77,8 @@ export class RegisterComponent implements OnInit {
   }
 
   /**
-   * Go to next step while form value is valid
+   * Get values from both forms and join them together
    */
- 
-
   getData(){
     var merged = Object.assign(this.validationForm1.value, this.validationForm2.value);
     console.log(merged);
@@ -107,10 +98,6 @@ export class RegisterComponent implements OnInit {
         },
         () => {
           this.wizardForm.goToNextStep();
-          /*this.validationForm1.reset();
-          setTimeout(() => {
-            this.router.navigate(['login']);
-          }, 2000);*/
         }
       );
     }

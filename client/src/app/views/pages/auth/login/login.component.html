@@ -9,17 +9,18 @@
         </div>
         <div class="col-md-8 pl-md-0">
           <div class="auth-form-wrapper px-4 py-5">
-            <a routerLink="." class="noble-ui-logo d-block mb-2">Noble<span>UI</span></a>
+            <a routerLink="." class="noble-ui-logo d-block mb-2">Atypik<span>House</span></a>
             <h5 class="text-muted font-weight-normal mb-4">Welcome back! Log in to your account.</h5>
 
             <form class="form-signin forms-sample" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
 
               <!-- Errors -->
-              <div *ngIf="errors?.validationErrors?.email" class="alert alert-danger mt-3">
-                {{ errors?.validationErrors?.email }}
+              
+              <div *ngIf="errors?.email" class="alert alert-danger mt-3">
+                  {{ errors?.email }}
               </div>
-              <div *ngIf="errors?.validationErrors?.password" class="alert alert-danger mt-3">
-                {{ errors?.validationErrors?.password }}
+              <div *ngIf="errors?.password" class="alert alert-danger mt-3">
+                {{ errors?.password }}
               </div>
               <div *ngIf="errors" class="alert alert-danger mt-3">
                 {{ errors }}

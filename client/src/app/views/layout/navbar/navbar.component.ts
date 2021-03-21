@@ -6,6 +6,7 @@ import { AuthService } from './../../../core/auth/auth.service';
 import { MENU } from './menu';
 import { MenuItem } from './menu.model';
 import { AuthStateService } from 'src/app/core/auth/auth-state.service';
+import { TokenService } from 'src/app/core/auth/token.service';
 
 @Component({
   selector: 'app-navbar',
@@ -13,18 +14,20 @@ import { AuthStateService } from 'src/app/core/auth/auth-state.service';
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent implements OnInit {
+  isSignedIn: boolean;
   public isBasicExampleMenuCollapsed = true;
   menuItems = [];
   private UserProfile: any;
   public isMenuCollapsed = true;
   error: any;
+
   /**
    * Fixed header menu on scroll
    */
   @HostListener('window:scroll', ['$event']) getScrollHeight(event) {
     if (window.matchMedia('(min-width: 992px)').matches) {
       let header: HTMLElement = document.querySelector('.horizontal-menu') as HTMLElement;
-      if(window.pageYOffset >= 61) {
+      if(window.pageYOffset >= 0) {
         header.parentElement.classList.add('fixed-on-scroll')
       } else {
         header.parentElement.classList.remove('fixed-on-scroll')
@@ -35,7 +38,7 @@ export class NavbarComponent implements OnInit {
   constructor(
     @Inject(DOCUMENT) private document: Document,
     private router: Router,
-
+    private token: TokenService,
     private renderer: Renderer2,
     private authstate: AuthStateService,
     private authService: AuthService
@@ -43,6 +46,13 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit(): void {
     this.menuItems = MENU;
+
+    /**
+     * Checking the authentification State of the user. (True or False)
+     */
+    this.authstate.userAuthState.subscribe(val => {
+      this.isSignedIn = val;
+    });
 
     /**
      * closing the header menu after route change in tablet/mobile devices
@@ -58,17 +68,20 @@ export class NavbarComponent implements OnInit {
     /**
      * User profile data . If can't retrieve data : logout.
      */
-    this.authService.profileUser().subscribe(
-      data => {
-        this.UserProfile = data.user;
-      }/*,
-      err => {
-        this.error = err.status;
-        if (this.error != 200) {
-          this.authstate.setAuthState(false);
-          this.router.navigate(['/auth/login']);
-        }
-      }*/);
+    if (this.isSignedIn){
+      this.authService.profileUser().subscribe(
+        data => {
+          this.UserProfile = data.user;
+        }/*,
+        err => {
+          this.error = err.status;
+          if (this.error != 200) {
+            this.authstate.setAuthState(false);
+            this.router.navigate(['/auth/login']);
+          }
+        }*/);
+    }
+    
   }
 
   /**

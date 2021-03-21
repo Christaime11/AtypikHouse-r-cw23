@@ -47,7 +47,7 @@
                <img alt="profile" src="https://via.placeholder.com/30x30">
              </a>
              <div aria-labelledby="profileDropdown" ngbDropdownMenu>
-               <div class="dropdown-header d-flex flex-column align-items-center">
+               <div *ngIf="isSignedIn" class="dropdown-header d-flex flex-column align-items-center">
                  <div class="figure mb-3">
                    <img alt="" src="https://via.placeholder.com/80x80">
                  </div>
@@ -58,24 +58,37 @@
                </div>
                <div class="dropdown-body">
                  <ul class="profile-nav p-0 pt-3">
-                   <li class="nav-item">
+                   <li *ngIf="isSignedIn" class="nav-item">
                      <a class="nav-link" routerLink="/general/profile">
                        <i class="feather icon-user"></i>
                        <span>Profile</span>
                      </a>
                    </li>
-                   <li class="nav-item">
+                   <li *ngIf="isSignedIn" class="nav-item">
                      <a (click)="false" class="nav-link" href="">
                        <i class="feather icon-edit"></i>
                        <span>Edit Profile</span>
                      </a>
                    </li>
-                   <li class="nav-item">
+                   <li *ngIf="isSignedIn" class="nav-item">
                      <a (click)="onLogout($event)" class="nav-link" href="">
                        <i class="feather icon-log-out"></i>
                        <span>Log Out</span>
                      </a>
                    </li>
+
+                   <li *ngIf="!isSignedIn" class="nav-item">
+                    <a class="nav-link" routerLink="/auth/login">
+                      <i class="feather icon-user"></i>
+                      <span>Se connecter</span>
+                    </a>
+                  </li>
+                  <li *ngIf="!isSignedIn" class="nav-item">
+                    <a class="nav-link" routerLink="/auth/register">
+                      <i class="feather icon-user"></i>
+                      <span>S'inscrire</span>
+                    </a>
+                  </li>
                  </ul>
                </div>
              </div>

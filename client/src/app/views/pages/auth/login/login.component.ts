@@ -16,6 +16,7 @@ export class LoginComponent implements OnInit {
   private success: any;
   private errors: any;
 
+
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -24,9 +25,7 @@ export class LoginComponent implements OnInit {
     private authState: AuthStateService,
   ) {
     this.loginForm = new FormGroup({
-      email: new FormControl(null, [
-        Validators.required,
-        Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]),
+      email: new FormControl(null, Validators.required),
       password: new FormControl(null, Validators.required)
     });
   }
@@ -41,18 +40,13 @@ export class LoginComponent implements OnInit {
       result => {
         this.success = result;
         this.responseHandler(result.token);
-        console.log('authentication successful ' + result.token);
-        localStorage.setItem('isLoggedin', 'true');
+        this.authState.setAuthState(true);
+        this.loginForm.reset();
       },
       res => {
         this.errors = res.error.error;
-
       }, () => {
-        this.authState.setAuthState(true);
-        this.loginForm.reset();
-        if (localStorage.getItem('isLoggedin')) {
-          this.router.navigate([this.returnUrl]);
-        }
+          this.router.navigate(['']);
       }
     );
   }
