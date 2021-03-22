@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {HabitatsService} from '../../../../core/habitats/habitats.service';
 
 @Component({
   selector: 'app-habitats',
@@ -6,10 +7,19 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./habitats.component.scss']
 })
 export class HabitatsComponent implements OnInit {
+  private data: any;
+  private habitats: any;
 
-  constructor() { }
+  constructor(
+    public habitatsService: HabitatsService,
+  ) { }
 
   ngOnInit(): void {
+    this.habitatsService.getAll().subscribe(
+      data => {
+        this.data = data;
+        this.habitats = this.data.habitats;
+      });
   }
 
 }

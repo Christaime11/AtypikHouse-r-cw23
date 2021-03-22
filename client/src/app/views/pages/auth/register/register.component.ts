@@ -14,8 +14,8 @@ export class RegisterComponent implements OnInit {
   validationForm1: FormGroup;
   validationForm2: FormGroup;
 
-  isForm1Submitted: Boolean;
-  isForm2Submitted: Boolean;
+  isForm1Submitted: boolean;
+  isForm2Submitted: boolean;
 
   @ViewChild('wizardForm') wizardForm: BaseWizardComponent;
   errors: any;
@@ -28,7 +28,7 @@ export class RegisterComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit(): void {
-    
+
     /**
      * form1 value validation
      */
@@ -56,6 +56,7 @@ export class RegisterComponent implements OnInit {
    * Returns form
    */
   get form1() {
+    console.log(this.validationForm1.controls);
     return this.validationForm1.controls;
   }
 
@@ -102,7 +103,7 @@ export class RegisterComponent implements OnInit {
       );
     }
     this.isForm2Submitted = true;
-    
+
   }
 
   goToLogin(){

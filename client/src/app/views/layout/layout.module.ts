@@ -23,21 +23,24 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 
 
 @NgModule({
-  declarations: [BaseComponent, NavbarComponent, FooterComponent, ContentAnimateDirective],
-  imports: [
-    CommonModule,
-    RouterModule,
-    FormsModule,
-    NgbDropdownModule,
-    NgbCollapseModule,
-    PerfectScrollbarModule,
-    FeahterIconModule
-  ],
-  providers: [
-    {
-      provide: PERFECT_SCROLLBAR_CONFIG,
-      useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
-    }
-  ]
+    declarations: [BaseComponent, NavbarComponent, FooterComponent, ContentAnimateDirective],
+    imports: [
+        CommonModule,
+        RouterModule,
+        FormsModule,
+        NgbDropdownModule,
+        NgbCollapseModule,
+        PerfectScrollbarModule,
+        FeahterIconModule
+    ],
+    exports: [
+        FooterComponent
+    ],
+    providers: [
+        {
+            provide: PERFECT_SCROLLBAR_CONFIG,
+            useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
+        }
+    ]
 })
 export class LayoutModule { }

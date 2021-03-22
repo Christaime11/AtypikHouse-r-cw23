@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { Router } from '@angular/router';
+import { AuthStateService } from './auth-state.service';
 
 // User interface
 export class User {
@@ -22,6 +23,7 @@ export class AuthService {
 
   constructor(
     private http: HttpClient,
+    private authstate: AuthStateService,
     private router: Router
   ) { }
 
@@ -43,8 +45,9 @@ export class AuthService {
    */
   onLogout(e) {
     e.preventDefault();
+    this.authstate.setAuthState(false);
     localStorage.removeItem('access_token')
-
+    
     if (!localStorage.getItem('access_token')) {
       this.router.navigate(['/']);
     }

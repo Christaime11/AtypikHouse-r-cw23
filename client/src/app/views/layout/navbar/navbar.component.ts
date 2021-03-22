@@ -72,14 +72,11 @@ export class NavbarComponent implements OnInit {
       this.authService.profileUser().subscribe(
         data => {
           this.UserProfile = data.user;
-        }/*,
+        },
         err => {
           this.error = err.status;
-          if (this.error != 200) {
-            this.authstate.setAuthState(false);
-            this.router.navigate(['/auth/login']);
-          }
-        }*/);
+          this.onLogout(event)
+        });
     }
     
   }

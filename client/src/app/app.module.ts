@@ -16,6 +16,8 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {RouterModule} from '@angular/router';
 import { AuthInterceptor } from './core/auth/auth.interceptor';
 import { HabitatsComponent } from './views/pages/public/habitats/habitats.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { HomeComponent } from './views/pages/public/home/home.component';
 
 
 // @ts-ignore
@@ -24,6 +26,7 @@ import { HabitatsComponent } from './views/pages/public/habitats/habitats.compon
     AppComponent,
     ErrorPageComponent,
     HabitatsComponent,
+    HomeComponent,
   ],
   imports: [
     BrowserModule,
@@ -34,6 +37,7 @@ import { HabitatsComponent } from './views/pages/public/habitats/habitats.compon
     RouterModule,
     ReactiveFormsModule,
     HttpClientModule,
+    NgbModule
   ],
   providers: [
     AuthGuard,

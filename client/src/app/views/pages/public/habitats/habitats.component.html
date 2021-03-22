@@ -1,1 +1,41 @@
-<p>habitats works!</p>
+<section class="bg-primary mb-5">
+
+  <div class="container">
+
+    <div class="d-flex justify-content-center justify-content-sm-between flex-wrap align-items-center"
+         style="height:130px">
+
+      <h1 class="text-white">Les habitats</h1>
+
+    </div><!--pager-sec-details end-->
+
+  </div>
+
+</section>
+
+<div class="container">
+
+  <div class="row">
+
+    <div class="col-md-8">
+      <ng-container *ngFor="let habitat of habitats">
+        <div class="col-lg-6 col-md-6">
+          <div class="card">
+            <img
+              alt="..."
+              class="card-img-top" src="https://images.unsplash.com/photo-1609712190172-83f79426b5a4?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1421&q=80">
+            <div class="card-body">
+              <h5 class="card-title">{{habitat.title}}</h5>
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
+                content.</p>
+              <a (click)="false" class="btn btn-primary mt-2" href="">Go somewhere</a>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+
+  </div>
+
+</div>
+

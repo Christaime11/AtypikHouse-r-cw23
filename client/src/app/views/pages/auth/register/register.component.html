@@ -39,6 +39,7 @@
 
 
                   <div class="form-group">
+
                     <label for="name">Nom et Prénom</label>
 
                     <input type="text" class="form-control" id="name" formControlName="name"
@@ -48,7 +49,6 @@
                       Requis
                     </div>
 
-
                   </div>
 
                   <div class="form-group">
@@ -56,9 +56,11 @@
 
                     <input type="email" class="form-control" id="email" formControlName="email"
                       [ngClass]="{'is-invalid': isForm1Submitted && form1.email.errors}" placeholder="Email">
+
                     <div *ngIf="isForm1Submitted && form1.email.errors?.required" class="invalid-feedback">
                       Requis
                     </div>
+
 
                   </div>
 

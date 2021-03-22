@@ -9,11 +9,18 @@
     margin-top: $navbar-height;
   }
  .page-content {
-    padding: 2rem 0;
+    /*padding: 2rem 0;
     @include make-container();
-    @extend .container;
+    @extend .container;*/
     min-height: calc(100vh - #{$navbar-height} - 50px);
     flex-grow: 1;
+
+   .page-container {
+     padding: 2rem 0;
+    @include make-container();
+    @extend .container;
+     min-height: calc(100vh - #{$navbar-height} - 50px);
+   }
 
     .content-nav-wrapper {
       padding: 0;

@@ -2,23 +2,23 @@ import { MenuItem } from './menu.model';
 
 export const MENU: MenuItem[] = [
   {
-    label: 'Dashboard',
+    label: 'Accueil',
     icon: 'home',
+    link: ''
+  },
+  {
+    label: 'Destinations',
+    icon: 'map-pin',
     link: '/dashboard'
   },
   {
-    label: 'UI Kit',
-    icon: 'feather',
-    link: '/dashboard'
+    label: 'Habitats',
+    icon: 'home',
+    link: '/habitats'
   },
   {
-    label: 'Forms',
-    icon: 'file-text',
-    link: '/dashboard'
-  },
-  {
-    label: 'Special pages',
-    icon: 'book',
+    label: 'Contact',
+    icon: 'phone-call',
     link: '/dashboard'
   }
 ];

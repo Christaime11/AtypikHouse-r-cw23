@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit {
   returnUrl: any;
   private success: any;
   private errors: any;
-
+  isFormSubmitted: boolean;
 
   constructor(
     private router: Router,
@@ -35,20 +35,29 @@ export class LoginComponent implements OnInit {
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
   }
 
+  get form() {
+    console.log(this.loginForm.controls);
+    return this.loginForm.controls;
+  }
+
   onSubmit() {
-    this.authService.signin(this.loginForm.value).subscribe(
-      result => {
-        this.success = result;
-        this.responseHandler(result.token);
-        this.authState.setAuthState(true);
-        this.loginForm.reset();
-      },
-      res => {
-        this.errors = res.error.error;
-      }, () => {
+    if(this.loginForm.valid) {
+      this.authService.signin(this.loginForm.value).subscribe(
+        result => {
+          this.success = result;
+          this.responseHandler(result.token);
+          this.authState.setAuthState(true);
+          this.loginForm.reset();
+        },
+        res => {
+          this.errors = res.error.error;
+        }, () => {
           this.router.navigate(['']);
-      }
-    );
+        }
+      );
+    }
+    this.isFormSubmitted = true;
+    console.log(this.isFormSubmitted)
   }
 
   // Handle response
