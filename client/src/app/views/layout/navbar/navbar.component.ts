@@ -48,7 +48,7 @@ export class NavbarComponent implements OnInit {
     this.menuItems = MENU;
 
     /**
-     * Checking the authentification State of the user. (True or False)
+     * Checking the authentication State of the user. (True or False)
      */
     this.authstate.userAuthState.subscribe(val => {
       this.isSignedIn = val;
@@ -78,7 +78,6 @@ export class NavbarComponent implements OnInit {
           this.onLogout(event)
         });
     }
-    
   }
 
   /**

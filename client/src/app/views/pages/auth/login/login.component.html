@@ -2,12 +2,8 @@
   <div class="col-md-8 col-xl-6 mx-auto">
     <div class="card">
       <div class="row">
-        <div class="col-md-4 pr-md-0">
-          <div class="auth-left-wrapper">
 
-          </div>
-        </div>
-        <div class="col-md-8 pl-md-0">
+        <div class="col-md-12">
           <div class="auth-form-wrapper px-4 py-5">
             <a routerLink="." class="noble-ui-logo d-block mb-2">Atypik<span>House</span></a>
             <h5 class="text-muted font-weight-normal mb-4">Welcome back! Log in to your account.</h5>
@@ -26,8 +22,6 @@
 
               <!-- Errors -->
 
-
-
               <div class="form-group">
                 <label for="email">Email address</label>
                 <input type="email"
@@ -36,7 +30,9 @@
                        id="email"
                        placeholder="Email"
                        value="admin@demo.com">
-                <div *ngIf="isFormSubmitted && form.email.errors?.required" class="invalid-feedback">
+                <div *ngIf="isFormSubmitted && (form.email.errors?.required || form.email.invalid )"
+                     class="invalid-feedback"
+                     [ngStyle]="{'display': isFormSubmitted ? 'block' : 'none'}">
                   Requis
                 </div>
               </div>
@@ -49,6 +45,11 @@
                        id="password"
                        autocomplete="current-password"
                        placeholder="Password">
+                <div *ngIf="isFormSubmitted && (form.password.errors?.required || form.password.invalid )"
+                     class="invalid-feedback"
+                     [ngStyle]="{'display': isFormSubmitted ? 'block' : 'none'}">
+                  Requis
+                </div>
               </div>
 
               <div class="form-check form-check-flat form-check-primary">
@@ -62,18 +63,15 @@
 
               <div class="mt-3">
                 <button type="submit" class="btn btn-primary mr-2 mb-2 mb-md-0">Se connecter</button>
-                <button type="button" class="btn btn-outline-primary btn-icon-text mb-2 mb-md-0">
-                  <i class="feather icon-twitter btn-icon-prepend"></i>
-                  Login with twitter
-                </button>
               </div>
 
-              <a routerLink="/auth/register" class="d-block mt-3 text-muted">Not a user? Sign up</a>
+              <a routerLink="/auth/register" class="d-block mt-3 text-muted">Pas inscrit ? S'inscrire</a>
 
             </form>
 
           </div>
         </div>
+
       </div>
     </div>
   </div>

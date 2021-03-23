@@ -10,13 +10,18 @@ import { HabitatsComponent } from './views/pages/public/habitats/habitats.compon
 const routes: Routes = [
  // { path:'', loadChildren: () => import('./views/pages/general/home/home.component').then(m => m.HomeComponent) },
 
-  { path:'auth', loadChildren: () => import('./views/pages/auth/auth.module').then(m => m.AuthModule) },
 
   { path: '',
     component: BaseComponent,
     children:[
-      { path: '', component: HomeComponent},
-      { path: 'habitats', component: HabitatsComponent},
+      {
+        path: '',
+        loadChildren: () => import('./views/pages/public/public.module').then(m => m.PublicModule)
+      },
+      {
+        path:'auth',
+        loadChildren: () => import('./views/pages/auth/auth.module').then(m => m.AuthModule)
+      },
     ]
   },
 

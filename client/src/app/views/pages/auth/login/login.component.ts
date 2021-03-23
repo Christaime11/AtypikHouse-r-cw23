@@ -23,16 +23,18 @@ export class LoginComponent implements OnInit {
     public authService: AuthService,
     private token: TokenService,
     private authState: AuthStateService,
-  ) {
+  ) { }
+
+  ngOnInit(): void{
+
     this.loginForm = new FormGroup({
-      email: new FormControl(null, Validators.required),
+      email: new FormControl(null, [Validators.required, Validators.email,
+        Validators.pattern('^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$')]),
       password: new FormControl(null, Validators.required)
     });
-  }
 
-  ngOnInit(): void {
-    // get return url from route parameters or default to '/'
-    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+    this.isFormSubmitted = false;
+
   }
 
   get form() {
@@ -52,12 +54,11 @@ export class LoginComponent implements OnInit {
         res => {
           this.errors = res.error.error;
         }, () => {
-          this.router.navigate(['']);
+          this.router.navigate(['/habitats']);
         }
       );
     }
     this.isFormSubmitted = true;
-    console.log(this.isFormSubmitted)
   }
 
   // Handle response

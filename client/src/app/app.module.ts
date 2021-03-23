@@ -15,9 +15,7 @@ import {ReactiveFormsModule} from '@angular/forms';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {RouterModule} from '@angular/router';
 import { AuthInterceptor } from './core/auth/auth.interceptor';
-import { HabitatsComponent } from './views/pages/public/habitats/habitats.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { HomeComponent } from './views/pages/public/home/home.component';
 
 
 // @ts-ignore
@@ -25,8 +23,6 @@ import { HomeComponent } from './views/pages/public/home/home.component';
   declarations: [
     AppComponent,
     ErrorPageComponent,
-    HabitatsComponent,
-    HomeComponent,
   ],
   imports: [
     BrowserModule,

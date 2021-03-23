@@ -1,8 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { WizardComponent as BaseWizardComponent } from 'angular-archwizard';
 import { AuthService } from 'src/app/core/auth/auth.service';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-register',
@@ -39,7 +39,7 @@ export class RegisterComponent implements OnInit {
     });
 
     /**
-     * formw value validation
+     * form value validation
      */
     this.validationForm2 = this.formBuilder.group({
       adresse : ['', Validators.required],
