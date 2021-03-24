@@ -2,7 +2,7 @@
 $regal-blue: #034378;
 $san-juan: #2d4e68;
 $bermuda: #77d7b9;
-$white: #fff;
+$white: #ffffffbf;
 $black: #000;
 $open-sans: 'Open Sans',
 sans-serif;
@@ -131,7 +131,8 @@ sans-serif;
   }
   .title {
     a {
-      color: lighten($black, 50%);
+      color: lighten($black, 27%);
+      font-size: 1.5rem;
     }
   }
   .menu-button {

@@ -19,7 +19,6 @@
      padding: 2rem 0;
     @include make-container();
     @extend .container;
-     min-height: calc(100vh - #{$navbar-height} - 50px);
    }
 
     .content-nav-wrapper {
