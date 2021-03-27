@@ -73,7 +73,7 @@
         font-size: 20px;
       }
       .weather-temp {
-        margin-top: .5rem;        
+        margin-top: .5rem;
         margin-bottom: 0;
         opacity: .5;
         font-size: .75rem;
@@ -87,6 +87,10 @@
   .card {
     box-shadow: none;
   }
+}
+
+.rounded-xl {
+  border-radius: 1.3rem !important;
 }
 
 @each $color, $value in $theme-colors {

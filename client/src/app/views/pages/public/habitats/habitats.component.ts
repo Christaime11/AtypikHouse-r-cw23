@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {HabitatsService} from '../../../../core/habitats/habitats.service';
+import { HabitatsService } from '../../../../core/habitats/habitats.service';
 import { SlicePipe } from '@angular/common';
 
 @Component({

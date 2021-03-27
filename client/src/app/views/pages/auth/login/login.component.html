@@ -1,85 +1,85 @@
-<div style="background-image: url('../assets/images/travel-iso.png');
-            background-position: right top;
-            background-size: contain;
-            background-repeat: no-repeat;
-            position: absolute;
-            height: 100%;">
 
-</div>
 
-<div class="row w-100 mx-0 auth-page"
-     style="background-image: url('../assets/images/travel-iso.png');
-            background-position: right top;
-            background-size: contain;
-            background-repeat: no-repeat;">
+  <div class="row w-100 mx-0 my-5 auth-page">
+    <div class="col-md-5 col-xl-5 mx-auto">
+      <div class="card">
+        <div class="row">
 
-  <div class="col-md-4 col-xl-4 mx-auto">
-    <div class="card">
-      <div class="row">
+          <div class="col-md-12">
+            <div class="auth-form-wrapper px-4 py-5">
+              <a routerLink="." class="noble-ui-logo d-block mb-2">Atypik<span>House</span></a>
+              <h5 class="text-muted font-weight-normal mb-4">Content de vous revoir! Connectez-vous à votre compte.</h5>
 
-        <div class="col-md-12">
-          <div class="auth-form-wrapper px-4 py-5">
-            <a routerLink="." class="noble-ui-logo d-block mb-2">Atypik<span>House</span></a>
-            <h5 class="text-muted font-weight-normal mb-4">Content de vous revoir! Connectez-vous à votre compte.</h5>
+              <div *ngIf="errors?.email" class="alert alert-danger mt-3">
+                {{ errors?.email }}
+              </div>
+              <div *ngIf="errors?.password" class="alert alert-danger mt-3">
+                {{ errors?.password }}
+              </div>
+              <div *ngIf="errors" class="alert alert-danger mt-3">
+                {{ errors }}
+              </div>
 
-            <div *ngIf="errors?.email" class="alert alert-danger mt-3">
-              {{ errors?.email }}
-            </div>
-            <div *ngIf="errors?.password" class="alert alert-danger mt-3">
-              {{ errors?.password }}
-            </div>
-            <div *ngIf="errors" class="alert alert-danger mt-3">
-              {{ errors }}
-            </div>
+              <form class="form-signin forms-sample" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
 
-            <form class="form-signin forms-sample" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+                <!-- Errors -->
 
-              <!-- Errors -->
-
-              <div class="form-group">
-                <label for="email">Email address</label>
-                <input type="email"
-                       formControlName="email"
-                       class="form-control"
-                       id="email"
-                       placeholder="Email"
-                       value="admin@demo.com">
-                <div *ngIf="isFormSubmitted && (form.email.errors?.required || form.email.invalid )"
-                     class="invalid-feedback"
-                     [ngStyle]="{'display': isFormSubmitted ? 'block' : 'none'}">
-                  Requis
+                <div class="form-group">
+                  <label for="email">Email address</label>
+                  <input type="email"
+                         formControlName="email"
+                         class="form-control"
+                         id="email"
+                         placeholder="Email"
+                         value="admin@demo.com">
+                  <div *ngIf="isFormSubmitted && (form.email.errors?.required || form.email.invalid )"
+                       class="invalid-feedback"
+                       [ngStyle]="{'display': isFormSubmitted ? 'block' : 'none'}">
+                    Requis
+                  </div>
                 </div>
-              </div>
 
-              <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password"
-                       formControlName="password"
-                       class="form-control"
-                       id="password"
-                       autocomplete="current-password"
-                       placeholder="Password">
-                <div *ngIf="isFormSubmitted && (form.password.errors?.required || form.password.invalid )"
-                     class="invalid-feedback"
-                     [ngStyle]="{'display': isFormSubmitted ? 'block' : 'none'}">
-                  Requis
+                <div class="form-group">
+                  <label for="password">Password</label>
+                  <input type="password"
+                         formControlName="password"
+                         class="form-control"
+                         id="password"
+                         autocomplete="current-password"
+                         placeholder="Password">
+                  <div *ngIf="isFormSubmitted && (form.password.errors?.required || form.password.invalid )"
+                       class="invalid-feedback"
+                       [ngStyle]="{'display': isFormSubmitted ? 'block' : 'none'}">
+                    Requis
+                  </div>
                 </div>
-              </div>
 
 
-              <div class="mt-3">
-                <button type="submit" class="btn btn-primary mr-2 mb-2 mb-md-0">Se connecter</button>
-              </div>
+                <div class="mt-3">
+                  <button type="submit" class="btn btn-primary mr-2 mb-2 mb-md-0">Se connecter</button>
+                </div>
 
-              <a routerLink="/auth/register" class="d-block mt-3 text-muted">Pas inscrit ? S'inscrire</a>
+                <a routerLink="/auth/register" class="d-block mt-3 text-muted">Pas inscrit ? S'inscrire</a>
 
-            </form>
+              </form>
 
+            </div>
           </div>
-        </div>
 
+        </div>
       </div>
     </div>
+    <!-- <div class="col-md-6">
+
+      <div style="background-image: url('../assets/images/travel-iso.png');
+            background-position: right center;
+            background-size: contain;
+            background-repeat: no-repeat;
+            height: 100%;
+            width: 100%">
+
+      </div>
+    </div> -->
   </div>
 
-</div>
+

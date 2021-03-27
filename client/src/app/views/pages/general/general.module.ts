@@ -15,11 +15,6 @@ const routes: Routes = [
     component: GeneralComponent,
     children: [
       {
-        path: '',
-        redirectTo: 'blank-page',
-        pathMatch: 'full'
-      },
-      {
         path: 'profile',
         component: ProfileComponent
       }
