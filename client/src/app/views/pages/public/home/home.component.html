@@ -16,41 +16,72 @@
               <div class="row">
                 <div class="col-sm-12">
                   <div class="form-group">
-                    <label class="control-label">First Name</label>
-                    <input type="text" class="form-control" placeholder="Enter first name">
+                    <label class="control-label">Destination</label>
+                    <input type="text"
+                           class="form-control"
+                           placeholder="Enter first name">
                   </div>
                 </div><!-- Col -->
               </div><!-- Row -->
               <div class="row">
                 <div class="col-sm-6">
                   <div class="form-group">
-                    <label class="control-label">City</label>
-                    <input type="text" class="form-control" placeholder="Enter city">
+                    <label class="control-label">Type d'habitat</label>
+                    <input type="text"
+                           class="form-control"
+                           placeholder="Enter city">
                   </div>
                 </div><!-- Col -->
                 <div class="col-sm-6">
                   <div class="form-group">
-                    <label class="control-label">State</label>
-                    <input type="text" class="form-control" placeholder="Enter state">
+                    <label class="control-label">Personnes</label>
+                    <input type="text"
+                           class="form-control"
+                           placeholder="Enter state">
                   </div>
                 </div><!-- Col -->
               </div><!-- Row -->
               <div class="row">
                 <div class="col-sm-6">
                   <div class="form-group">
-                    <label class="control-label">Email address</label>
-                    <input type="email" class="form-control" placeholder="Enter email">
+                    <label class="control-label">Date d'entrée</label>
+                    <div class="input-group">
+                      <input class="form-control"
+                             placeholder="yyyy-mm-dd"
+                             name="dp"
+                             ngbDatepicker
+                             [(ngModel)]="selectedDate"
+                             [minDate]="minDate"
+                             #d="ngbDatepicker">
+                      <div class="input-group-append">
+                        <button class="btn btn-outline-light btn-icon calendar" type="button" (click)="d.toggle()" type="button">
+                          <i data-feather="calendar" appFeatherIcon class="text-secondary"></i>
+                        </button>
+                      </div>
+                    </div>
                   </div>
                 </div><!-- Col -->
                 <div class="col-sm-6">
                   <div class="form-group">
-                    <label class="control-label">Password</label>
-                    <input type="password" class="form-control" autocomplete="off" placeholder="Password">
+                    <label class="control-label">Date de sortie</label>
+                    <div class="input-group">
+                      <input class="form-control"
+                             placeholder="yyyy-mm-dd"
+                             name="dp2"
+                             [(ngModel)]="selectedDate2"
+                             ngbDatepicker
+                             #d2="ngbDatepicker">
+                      <div class="input-group-append">
+                        <button class="btn btn-outline-light btn-icon calendar" type="button"  (click)="d2.toggle()">
+                          <i data-feather="calendar" appFeatherIcon class="text-secondary"></i>
+                        </button>
+                      </div>
+                    </div>
                   </div>
                 </div><!-- Col -->
               </div><!-- Row -->
             </form>
-            <button type="button" class="btn btn-primary submit">Submit form</button>
+            <button type="button" class="btn btn-primary submit">Rechercher</button>
           </div>
         </div>
       </div>
@@ -60,6 +91,8 @@
   </div>
 
 </section>
+<pre>Model: {{ selectedDate | json }}</pre>
+<pre>Model2: {{ selectedDate2 | json }}</pre>
 
 
 
