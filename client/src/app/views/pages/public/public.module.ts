@@ -9,6 +9,7 @@ import { PublicComponent } from './public.component';
 import { HomeComponent } from './home/home.component';
 import { HabitatsComponent } from './habitats/habitats.component';
 import { FeahterIconModule } from '../../../core/feather-icon/feather-icon.module';
+import {BsDatepickerModule} from 'ngx-bootstrap/datepicker';
 
 
 const routes: Routes = [
@@ -37,7 +38,8 @@ const routes: Routes = [
     CommonModule,
     NgbDatepickerModule,
     FormsModule,
-    FeahterIconModule
+    FeahterIconModule,
+    BsDatepickerModule.forRoot(),
   ]
 })
 export class PublicModule { }

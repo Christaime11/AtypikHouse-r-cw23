@@ -28,7 +28,7 @@ export class CustomAdapter extends NgbDateAdapter<string> {
     return null;
   }
 
-  toModel(date: NgbDateStruct | null): string | null {
+  toModel(date: NgbDate | null): string | null {
     return date ? date.year + this.DELIMITER + date.month + this.DELIMITER + date.day : null;
   }
 }
@@ -53,7 +53,7 @@ export class CustomDateParserFormatter extends NgbDateParserFormatter {
     return null;
   }
 
-  format(date: NgbDateStruct | null): string {
+  format(date: NgbDate | null): string {
     return date ? date.year + this.DELIMITER + date.month + this.DELIMITER + date.day : '';
   }
 }
@@ -80,22 +80,63 @@ export class HomeComponent implements OnInit {
   selectedDate2: NgbDateStruct;
   minDate = undefined;
 
-  constructor(private config: NgbDatepickerConfig) {
+  hoveredDate: NgbDate | null = null;
+
+  fromDate: NgbDate | null;
+  toDate: NgbDate | null;
+
+  constructor(private config: NgbDatepickerConfig,
+              private calendar: NgbCalendar,
+              public formatter: NgbDateParserFormatter)
+  {
+     // this.fromDate = calendar.getToday();
+    // this.toDate = calendar.getNext(calendar.getToday(), 'd', 10);
+
     const current = new Date();
     config.minDate = {
       year: current.getFullYear(),
       month: current.getMonth() + 1,
       day: current.getDate()
     };
+    // @ts-ignore
     config.maxDate = {
       year: current.getFullYear() + 1,
       month: current.getMonth() + 1,
       day: current.getDate()
     };
     config.outsideDays = 'hidden';
+  }
+
+  onDateSelection(date: NgbDate) {
+    if (!this.fromDate && !this.toDate) {
+      this.fromDate = date;
+    } else if (this.fromDate && !this.toDate && date && date.after(this.fromDate)) {
+      this.toDate = date;
+    } else {
+      this.toDate = null;
+      this.fromDate = date;
     }
+  }
+
+  isHovered(date: NgbDate) {
+    return this.fromDate && !this.toDate && this.hoveredDate && date.after(this.fromDate) && date.before(this.hoveredDate);
+  }
+
+  isInside(date: NgbDate) {
+    return this.toDate && date.after(this.fromDate) && date.before(this.toDate);
+  }
+
+  isRange(date: NgbDate) {
+    return date.equals(this.fromDate) || (this.toDate && date.equals(this.toDate)) || this.isInside(date) || this.isHovered(date);
+  }
+
+  validateInput(currentValue: NgbDate | null, input: string): NgbDate | null {
+    const parsed = this.formatter.parse(input);
+    return parsed && this.calendar.isValid(NgbDate.from(parsed)) ? NgbDate.from(parsed) : currentValue;
+  }
 
   ngOnInit(): void {
+    console.log(this.validateInput)
   }
 
 }

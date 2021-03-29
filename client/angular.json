@@ -29,6 +29,8 @@
               "src/.htaccess"
             ],
             "styles": [
+              "./node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "./node_modules/ngx-bootstrap/datepicker/bs-datepicker.css",
               "node_modules/angular-archwizard/archwizard.scss",
               "src/styles.scss",
               "src/assets/scss/style.scss"
@@ -98,6 +100,8 @@
               "src/assets"
             ],
             "styles": [
+              "./node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "./node_modules/ngx-bootstrap/datepicker/bs-datepicker.css",
               "src/styles.scss"
             ],
             "scripts": []
