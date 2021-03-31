@@ -42,7 +42,10 @@
 
                     <label for="name">Nom et Prénom</label>
 
-                    <input type="text" class="form-control" id="name" formControlName="name"
+                    <input type="text"
+                           class="form-control"
+                           id="name"
+                           formControlName="name"
                       [ngClass]="{'is-invalid': isForm1Submitted && form1.name.errors}" placeholder="Nom et Prénom">
 
                     <div *ngIf="isForm1Submitted && form1.name.errors?.required" class="invalid-feedback">

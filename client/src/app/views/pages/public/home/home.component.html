@@ -12,13 +12,16 @@
       <div class="col-md-6 p-0 d-flex align-items-center">
         <div class="card w-100 rounded-xl">
           <div class="card-body">
-            <form>
+
+            <form (ngSubmit)="formSubmit()" [formGroup]="validationForm">
               <div class="row">
                 <div class="col-sm-12">
                   <div class="form-group">
-                    <label class="control-label">Destination</label>
+                    <label for="destination" class="control-label">Destination</label>
                     <input type="text"
                            class="form-control"
+                           id="destination"
+                           formControlName="destination"
                            placeholder="Enter first name">
                   </div>
                 </div><!-- Col -->
@@ -26,17 +29,21 @@
               <div class="row">
                 <div class="col-sm-6">
                   <div class="form-group">
-                    <label class="control-label">Type d'habitat</label>
+                    <label for="type" class="control-label">Type d'habitat</label>
                     <input type="text"
                            class="form-control"
+                           id="type"
+                           formControlName="type"
                            placeholder="Enter city">
                   </div>
                 </div><!-- Col -->
                 <div class="col-sm-6">
                   <div class="form-group">
-                    <label class="control-label">Personnes</label>
+                    <label for="personnes" class="control-label">Personnes</label>
                     <input type="text"
                            class="form-control"
+                           id="personnes"
+                           formControlName="personnes"
                            placeholder="Enter state">
                   </div>
                 </div><!-- Col -->
@@ -69,12 +76,15 @@
                       </ng-template>
                     </div>
                   </div>
-                  <div class="form-group">
-                    <label class="control-label">Type d'habitat</label>
 
+                  <div class="form-group">
+                    <label for="fromdate" class="control-label">Type d'habitat</label>
                     <div class="input-group">
                       <input #dpFromDate
-                             class="form-control" placeholder="yyyy-mm-dd"
+                             class="form-control"
+                             placeholder="jj-mm-aaaa"
+                             id="fromdate"
+                             formControlName="fromdate"
                              name="dpFromDate"
                              [value]="formatter.format(fromDate)"
                              (input)="fromDate = validateInput(fromDate, dpFromDate.value)">
@@ -86,16 +96,17 @@
                     </div>
                   </div>
 
-
                 </div><!-- Col -->
 
                 <div class="col-sm-6">
                   <div class="form-group">
-                    <label class="control-label">Type d'habitat</label>
-
+                    <label for="todate" class="control-label">Type d'habitat</label>
                     <div class="input-group">
                       <input #dpToDate
-                             class="form-control" placeholder="yyyy-mm-dd"
+                             class="form-control"
+                             placeholder="jj-mm-aaaa"
+                             id="todate"
+                             formControlName="todate"
                              name="dpToDate"
                              [value]="formatter.format(toDate)"
                              (input)="toDate = validateInput(toDate, dpToDate.value)">
@@ -106,11 +117,15 @@
                       </div>
                     </div>
                   </div>
+
                 </div><!-- Col -->
 
               </div><!-- Row -->
+
+              <button type="submit" class="btn btn-primary submit">Rechercher</button>
+
             </form>
-            <button type="button" class="btn btn-primary submit">Rechercher</button>
+
           </div>
         </div>
       </div>
@@ -121,9 +136,11 @@
 
 </section>
 
-<pre>From date model: {{ formatter.format(fromDate) | json }}</pre>
+<button class="btn btn-sm btn-outline-primary" (click)="model2 = today()">Select Today</button>
+
+
+<pre>Model: {{ model2 | json }}</pre>
+<pre>From date model: {{ formatter.format(fromDate) | json  }}</pre>
 <pre>To date model: {{ formatter.format(toDate) | json }}</pre>
-
-
 
 

@@ -8,6 +8,8 @@ import {
   NgbDateAdapter
 } from '@ng-bootstrap/ng-bootstrap';
 
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+
 /**
  * This Service handles how the date is represented in scripts i.e. ngModel.
  */
@@ -28,7 +30,7 @@ export class CustomAdapter extends NgbDateAdapter<string> {
     return null;
   }
 
-  toModel(date: NgbDate | null): string | null {
+  toModel(date: NgbDateStruct | null): string | null {
     return date ? date.year + this.DELIMITER + date.month + this.DELIMITER + date.day : null;
   }
 }
@@ -53,9 +55,11 @@ export class CustomDateParserFormatter extends NgbDateParserFormatter {
     return null;
   }
 
-  format(date: NgbDate | null): string {
-    return date ? date.year + this.DELIMITER + date.month + this.DELIMITER + date.day : '';
+  format(date: NgbDateStruct | null): string {
+    return date ? date.day + this.DELIMITER + date.month + this.DELIMITER + date.year : '';
   }
+
+
 }
 
 
@@ -68,7 +72,7 @@ export class CustomDateParserFormatter extends NgbDateParserFormatter {
   // NOTE: For this example we are only providing current component, but probably
   // NOTE: you will want to provide your main App Module
   providers: [
-    {provide: NgbDateAdapter, useClass: CustomAdapter},
+    { provide: NgbDateAdapter, useClass: CustomAdapter},
     { provide: NgbDateParserFormatter, useClass: CustomDateParserFormatter }
   ]
 })
@@ -79,15 +83,21 @@ export class HomeComponent implements OnInit {
   selectedDate: NgbDateStruct;
   selectedDate2: NgbDateStruct;
   minDate = undefined;
+  model2: string;
 
   hoveredDate: NgbDate | null = null;
-
+  public formatter2: CustomAdapter;
   fromDate: NgbDate | null;
   toDate: NgbDate | null;
+  validationForm: FormGroup;
 
-  constructor(private config: NgbDatepickerConfig,
+  constructor(public formBuilder: FormBuilder,
+              private config: NgbDatepickerConfig,
               private calendar: NgbCalendar,
-              public formatter: NgbDateParserFormatter)
+              public formatter: NgbDateParserFormatter,
+              private dateAdapter: NgbDateAdapter<string>,
+              private ngbCalendar: NgbCalendar
+              )
   {
      // this.fromDate = calendar.getToday();
     // this.toDate = calendar.getNext(calendar.getToday(), 'd', 10);
@@ -105,6 +115,15 @@ export class HomeComponent implements OnInit {
       day: current.getDate()
     };
     config.outsideDays = 'hidden';
+
+    this.validationForm = this.formBuilder.group({
+      destination : ['', Validators.required],
+      type : ['', [Validators.required]],
+      personnes : ['', Validators.required],
+      fromdate : [null, Validators.required],
+      todate : [null, Validators.required],
+    });
+
   }
 
   onDateSelection(date: NgbDate) {
@@ -135,8 +154,15 @@ export class HomeComponent implements OnInit {
     return parsed && this.calendar.isValid(NgbDate.from(parsed)) ? NgbDate.from(parsed) : currentValue;
   }
 
-  ngOnInit(): void {
-    console.log(this.validateInput)
+  today() {
+    // tslint:disable-next-line:no-non-null-assertion
+    return this.dateAdapter.toModel(this.ngbCalendar.getToday())!;
   }
 
+  ngOnInit(): void {
+  }
+
+  formSubmit() {
+    console.log(this.validationForm.value)
+  }
 }

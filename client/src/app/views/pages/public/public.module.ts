@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
 import { NgbDatepickerModule, NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
-import { FormsModule } from '@angular/forms'; // 1
+import {FormsModule, ReactiveFormsModule} from '@angular/forms'; // 1
 
 
 import { PublicComponent } from './public.component';
@@ -40,6 +40,7 @@ const routes: Routes = [
     FormsModule,
     FeahterIconModule,
     BsDatepickerModule.forRoot(),
+    ReactiveFormsModule,
   ]
 })
 export class PublicModule { }
