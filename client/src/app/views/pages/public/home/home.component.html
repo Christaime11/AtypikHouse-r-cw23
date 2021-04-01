@@ -1,3 +1,6 @@
+
+
+
 <section class="bg-animated" style="position: relative; height:60vh;">
 
   <div class="container h-100">
@@ -15,115 +18,60 @@
 
             <form (ngSubmit)="formSubmit()" [formGroup]="validationForm">
               <div class="row">
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <mat-form-field appearance="outline" style="width: 100%" class="pb-0">
+                      <mat-label>Destinations</mat-label>
+                      <mat-select formControlName="destination">
+                        <mat-option value="Limousin">Limousin</mat-option>
+                        <mat-option value="Bretagne">Bretagne</mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                </div><!-- Col -->
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <mat-form-field appearance="outline" style="width: 100%" class="pb-0">
+                      <mat-label>Type d'habitat</mat-label>
+                      <mat-select formControlName="type">
+                        <mat-option value="Bulle">Bulle</mat-option>
+                        <mat-option value="Cabane">Cabane</mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                </div><!-- Col -->
+              </div><!-- Row -->
+              <div class="row">
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <mat-form-field appearance="outline" style="width: 100%" class="pb-0">
+                      <mat-label>Nombre de personne</mat-label>
+                      <mat-select formControlName="personnes">
+                        <mat-option value="1">1</mat-option>
+                        <mat-option value="2">2</mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                </div><!-- Col -->
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <mat-form-field appearance="outline" style="width:100%" class="pb-0">
+                      <mat-label>Select Date Range</mat-label>
+                      <mat-date-range-input [rangePicker]="picker" [formGroup]="validationForm">
+                        <input matStartDate placeholder="Start Date" formControlName="start" [min]="minDate" [max]="maxDate">
+                        <input matEndDate placeholder="End Date" formControlName="end" [min]="minDate" [max]="maxDate">
+                      </mat-date-range-input>
+                      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                      <mat-date-range-picker #picker></mat-date-range-picker>
+                    </mat-form-field>
+                  </div>
+                </div>
+              </div><!-- Row -->
+              <div class="row">
                 <div class="col-sm-12">
-                  <div class="form-group">
-                    <label for="destination" class="control-label">Destination</label>
-                    <input type="text"
-                           class="form-control"
-                           id="destination"
-                           formControlName="destination"
-                           placeholder="Enter first name">
-                  </div>
-                </div><!-- Col -->
-              </div><!-- Row -->
-              <div class="row">
-                <div class="col-sm-6">
-                  <div class="form-group">
-                    <label for="type" class="control-label">Type d'habitat</label>
-                    <input type="text"
-                           class="form-control"
-                           id="type"
-                           formControlName="type"
-                           placeholder="Enter city">
-                  </div>
-                </div><!-- Col -->
-                <div class="col-sm-6">
-                  <div class="form-group">
-                    <label for="personnes" class="control-label">Personnes</label>
-                    <input type="text"
-                           class="form-control"
-                           id="personnes"
-                           formControlName="personnes"
-                           placeholder="Enter state">
-                  </div>
-                </div><!-- Col -->
-              </div><!-- Row -->
-              <div class="row">
-
-                <div class="col-sm-6">
-                  <div class="form-group hidden">
-                    <div class="input-group">
-                      <input name="datepicker" style="opacity: 0;"
-                             class="form-control"
-                             ngbDatepicker
-                             #datepicker="ngbDatepicker"
-                             [autoClose]="'outside'"
-                             (dateSelect)="onDateSelection($event)"
-                             [displayMonths]="2"
-                             [dayTemplate]="t"
-                             outsideDays="hidden"
-                             [startDate]="fromDate!"
-                             tabindex="-1">
-                      <ng-template #t let-date let-focused="focused">
-                        <span class="custom-day"
-                              [class.focused]="focused"
-                              [class.range]="isRange(date)"
-                              [class.faded]="isHovered(date) || isInside(date)"
-                              (mouseenter)="hoveredDate = date"
-                              (mouseleave)="hoveredDate = null">
-                          {{ date.day }}
-                        </span>
-                      </ng-template>
-                    </div>
-                  </div>
-
-                  <div class="form-group">
-                    <label for="fromdate" class="control-label">Type d'habitat</label>
-                    <div class="input-group">
-                      <input #dpFromDate
-                             class="form-control"
-                             placeholder="jj-mm-aaaa"
-                             id="fromdate"
-                             formControlName="fromdate"
-                             name="dpFromDate"
-                             [value]="formatter.format(fromDate)"
-                             (input)="fromDate = validateInput(fromDate, dpFromDate.value)">
-                      <div class="input-group-append">
-                        <button class="btn btn-icon btn-outline-secondary calendar" (click)="datepicker.toggle()" type="button">
-                          <i data-feather="calendar" appFeatherIcon></i>
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-
-                </div><!-- Col -->
-
-                <div class="col-sm-6">
-                  <div class="form-group">
-                    <label for="todate" class="control-label">Type d'habitat</label>
-                    <div class="input-group">
-                      <input #dpToDate
-                             class="form-control"
-                             placeholder="jj-mm-aaaa"
-                             id="todate"
-                             formControlName="todate"
-                             name="dpToDate"
-                             [value]="formatter.format(toDate)"
-                             (input)="toDate = validateInput(toDate, dpToDate.value)">
-                      <div class="input-group-append">
-                        <button class="btn btn-icon btn-outline-secondary calendar" (click)="datepicker.toggle()" type="button">
-                          <i data-feather="calendar" appFeatherIcon></i>
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-
-                </div><!-- Col -->
-
-              </div><!-- Row -->
-
-              <button type="submit" class="btn btn-primary submit">Rechercher</button>
-
+                  <button mat-flat-button class="btn btn-primary bg-primary submit" type="submit" color="primary">Rechercher</button>
+                </div>
+              </div>
             </form>
 
           </div>
@@ -136,11 +84,5 @@
 
 </section>
 
-<button class="btn btn-sm btn-outline-primary" (click)="model2 = today()">Select Today</button>
-
-
-<pre>Model: {{ model2 | json }}</pre>
-<pre>From date model: {{ formatter.format(fromDate) | json  }}</pre>
-<pre>To date model: {{ formatter.format(toDate) | json }}</pre>
-
+<h3>validationForm: {{validationForm.value | json}}</h3>
 

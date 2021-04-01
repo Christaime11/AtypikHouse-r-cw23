@@ -10,6 +10,12 @@ import { HomeComponent } from './home/home.component';
 import { HabitatsComponent } from './habitats/habitats.component';
 import { FeahterIconModule } from '../../../core/feather-icon/feather-icon.module';
 import {BsDatepickerModule} from 'ngx-bootstrap/datepicker';
+import {MatSelectModule} from '@angular/material/select';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatButtonModule} from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatNativeDateModule } from '@angular/material/core';
 
 
 const routes: Routes = [
@@ -41,6 +47,12 @@ const routes: Routes = [
     FeahterIconModule,
     BsDatepickerModule.forRoot(),
     ReactiveFormsModule,
+    MatSelectModule,
+    MatDatepickerModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatNativeDateModule
   ]
 })
 export class PublicModule { }

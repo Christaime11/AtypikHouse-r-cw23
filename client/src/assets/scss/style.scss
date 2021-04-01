@@ -1,4 +1,4 @@
-
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
 // Booststrap functions and variables
 @import '~bootstrap/scss/functions';
 @import '~bootstrap/scss/variables';
@@ -113,4 +113,8 @@
   .custom-day{
     color: gainsboro !important;
   }
+}
+
+.mat-form-field-wrapper {
+  padding-bottom: 0 !important;
 }
