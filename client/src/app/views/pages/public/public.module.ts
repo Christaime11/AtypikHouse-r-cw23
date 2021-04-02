@@ -16,6 +16,8 @@ import {MatButtonModule} from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatNativeDateModule } from '@angular/material/core';
+import {NgxMatSelectSearchModule} from "ngx-mat-select-search";
+import {MatIconModule} from "@angular/material/icon";
 
 
 const routes: Routes = [
@@ -52,7 +54,9 @@ const routes: Routes = [
     MatButtonModule,
     MatFormFieldModule,
     MatInputModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    NgxMatSelectSearchModule,
+    MatIconModule
   ]
 })
 export class PublicModule { }

@@ -32,10 +32,13 @@
                 <div class="col-sm-6">
                   <div class="form-group">
                     <mat-form-field appearance="outline" style="width: 100%" class="pb-0">
-                      <mat-label>Type d'habitat</mat-label>
-                      <mat-select formControlName="type">
-                        <mat-option value="Bulle">Bulle</mat-option>
-                        <mat-option value="Cabane">Cabane</mat-option>
+                      <mat-select formControlName="type" [formControl]="bankCtrl" placeholder="Type d'habitat" #singleSelect>
+                        <mat-option>
+                          <ngx-mat-select-search [formControl]="bankFilterCtrl"></ngx-mat-select-search>
+                        </mat-option>
+                        <mat-option *ngFor="let bank of filteredBanks | async" [value]="bank">
+                          {{bank.name}}
+                        </mat-option>
                       </mat-select>
                     </mat-form-field>
                   </div>
@@ -47,8 +50,10 @@
                     <mat-form-field appearance="outline" style="width: 100%" class="pb-0">
                       <mat-label>Nombre de personne</mat-label>
                       <mat-select formControlName="personnes">
-                        <mat-option value="1">1</mat-option>
-                        <mat-option value="2">2</mat-option>
+                        <mat-option *ngFor="let number of personnes" [value]="number">
+                          {{number}}
+                        </mat-option>
+                        <mat-option value="11+">11+</mat-option>
                       </mat-select>
                     </mat-form-field>
                   </div>
@@ -57,11 +62,13 @@
                   <div class="form-group">
                     <mat-form-field appearance="outline" style="width:100%" class="pb-0">
                       <mat-label>Select Date Range</mat-label>
-                      <mat-date-range-input [rangePicker]="picker" [formGroup]="validationForm">
-                        <input matStartDate placeholder="Start Date" formControlName="start" [min]="minDate" [max]="maxDate">
-                        <input matEndDate placeholder="End Date" formControlName="end" [min]="minDate" [max]="maxDate">
+                      <mat-date-range-input [rangePicker]="picker" [formGroup]="validationForm" [min]="minDate" [max]="maxDate">
+                        <input matStartDate placeholder="Start Date" formControlName="start">
+                        <input matEndDate placeholder="End Date" formControlName="end">
                       </mat-date-range-input>
-                      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                      <mat-datepicker-toggle matSuffix [for]="picker">
+                        <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+                      </mat-datepicker-toggle>
                       <mat-date-range-picker #picker></mat-date-range-picker>
                     </mat-form-field>
                   </div>
@@ -69,7 +76,7 @@
               </div><!-- Row -->
               <div class="row">
                 <div class="col-sm-12">
-                  <button mat-flat-button class="btn btn-primary bg-primary submit" type="submit" color="primary">Rechercher</button>
+                  <button mat-flat-button class="w-100 btn btn-primary bg-primary submit" style="height:48px" type="submit" color="primary">Rechercher</button>
                 </div>
               </div>
             </form>
