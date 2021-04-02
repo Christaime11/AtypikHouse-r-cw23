@@ -59,7 +59,7 @@
                   </div>
                 </div><!-- Col -->
                 <div class="col-sm-6">
-                  <div class="form-group">
+                  <div class="form-group transform-arrow">
                     <mat-form-field appearance="outline" style="width:100%" class="pb-0">
                       <mat-label>Select Date Range</mat-label>
                       <mat-date-range-input [rangePicker]="picker" [formGroup]="validationForm" [min]="minDate" [max]="maxDate">
@@ -67,7 +67,6 @@
                         <input matEndDate placeholder="End Date" formControlName="end">
                       </mat-date-range-input>
                       <mat-datepicker-toggle matSuffix [for]="picker">
-                        <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
                       </mat-datepicker-toggle>
                       <mat-date-range-picker #picker></mat-date-range-picker>
                     </mat-form-field>

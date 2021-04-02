@@ -122,3 +122,9 @@
 .mat-select-placeholder {
   color: rgba(0, 0, 0, 0.6) !important;
 }
+
+
+  .mat-form-field-appearance-outline .mat-select-arrow-wrapper {
+    transform: translateX(-50%) !important;
+  }
+
