@@ -7,7 +7,6 @@ import { take, takeUntil } from 'rxjs/operators';
 import { MAT_DATE_FORMATS } from '@angular/material/core';
 import { Bank, BANKS } from './demo-data';
 
-
 import {MomentDateAdapter, MAT_MOMENT_DATE_ADAPTER_OPTIONS} from '@angular/material-moment-adapter';
 import {DateAdapter, MAT_DATE_LOCALE} from '@angular/material/core';
 
@@ -26,12 +25,13 @@ export const MY_FORMATS = {
     dateInput: 'DD-MM-YYYY',
   },
   display: {
-    dateInput: 'DD-MM-YYYY',
+    dateInput: 'DD/MM/YYYY',
     monthYearLabel: 'MMMM-YYYY',
     dateA11yLabel: 'LL',
     monthYearA11yLabel: 'MMMM YYYY',
   },
 };
+
 
 @Component({
   selector: 'app-home',
@@ -48,6 +48,8 @@ export const MY_FORMATS = {
     },
 
     {provide: MAT_DATE_FORMATS, useValue: MY_FORMATS},
+    {provide: MAT_DATE_LOCALE, useValue: 'fr-FR'},
+
   ],
 })
 
