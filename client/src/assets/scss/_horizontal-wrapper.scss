@@ -16,7 +16,6 @@
     flex-grow: 1;
 
    .page-container {
-     padding: 2rem 0;
     @include make-container();
     @extend .container;
    }

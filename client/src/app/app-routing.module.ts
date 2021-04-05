@@ -6,8 +6,6 @@ import { ErrorPageComponent } from './views/pages/error-page/error-page.componen
 
 
 const routes: Routes = [
- // { path:'', loadChildren: () => import('./views/pages/general/home/home.component').then(m => m.HomeComponent) },
-
 
   { path: '',
     component: BaseComponent,
@@ -23,8 +21,7 @@ const routes: Routes = [
     ]
   },
 
-  {
-    path: '',
+  { path: '',
     component: BaseComponent,
     canActivate: [AuthGuard],
     children: [
@@ -44,8 +41,7 @@ const routes: Routes = [
     ]
   },
 
-  {
-    path: 'error',
+  { path: 'error',
     component: ErrorPageComponent,
     data: {
       type: 404,
@@ -53,15 +49,16 @@ const routes: Routes = [
       desc: 'Oopps!! The page you were looking for doesn\'t exist.'
     }
   },
-  {
-    path: 'error/:type',
+
+  { path: 'error/:type',
     component: ErrorPageComponent
   },
+
   { path: '**', redirectTo: 'error', pathMatch: 'full' }
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes, { scrollPositionRestoration: 'top' })],
-  exports: [RouterModule]
+  exports: [RouterModule, ]
 })
 export class AppRoutingModule { }

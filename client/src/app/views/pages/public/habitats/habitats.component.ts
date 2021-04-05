@@ -10,6 +10,7 @@ import { SlicePipe } from '@angular/common';
 export class HabitatsComponent implements OnInit {
   private data: any;
   private habitats: any;
+  ready = false
 
   constructor(
     public habitatsService: HabitatsService,
@@ -22,5 +23,10 @@ export class HabitatsComponent implements OnInit {
         this.habitats = this.data.habitats;
       });
   }
+
+  ngAfterViewInit(){ 
+    this.ready = true; 
+  }
+
 
 }
