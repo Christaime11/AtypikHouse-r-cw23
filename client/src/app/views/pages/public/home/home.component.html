@@ -30,7 +30,8 @@
                 <div class="col-sm-6">
                   <div class="form-group">
                     <mat-form-field appearance="outline" style="width: 100%" class="pb-0">
-                      <mat-select formControlName="type" [formControl]="bankCtrl" placeholder="Type d'habitat" #singleSelect>
+                      <mat-label>Type d'habitat</mat-label>
+                      <mat-select formControlName="type" [formControl]="bankCtrl" #singleSelect>
                         <mat-option>
                           <ngx-mat-select-search placeholderLabel="Type" [formControl]="bankFilterCtrl"></ngx-mat-select-search>
                         </mat-option>

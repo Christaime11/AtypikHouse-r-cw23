@@ -54,7 +54,7 @@ const routes: Routes = [
     MatInputModule,
     MatNativeDateModule,
     NgxMatSelectSearchModule,
-    MatIconModule
+    MatIconModule,
   ]
 })
 export class PublicModule { }
