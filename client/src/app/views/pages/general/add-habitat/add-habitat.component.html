@@ -18,6 +18,7 @@
 
               <aw-wizard #wizardForm>
                 <aw-wizard-step stepTitle="étape 1">
+
                   <form class='mt-4' (ngSubmit)="form1Submit()" [formGroup]="validationForm1">
 
                     <div class="form-group">
@@ -54,6 +55,9 @@
                                  placeholder="Type d'Habitats"
                                  [ngClass]="{'is-invalid': isForm1Submitted && form1.typeHabitat.errors}">
                       </ng-select>
+                      <div *ngIf="isForm1Submitted && form1.adresse.errors?.required" class="invalid-feedback">
+                        Requis
+                      </div>
                     </div>
 
                     <div class="form-group">
@@ -93,7 +97,6 @@
                              type="file">
                     </div>
 
-
                     <div class="d-flex justify-content-left mt-4">
                       <button class="btn btn-primary" type="submit">Continuer</button>
                     </div>
@@ -108,21 +111,104 @@
 
                     <div class="form-group">
                       <label for="nombreChambre">Nombre de chambres</label>
-
                       <input class="form-control"
                              formControlName="nombreChambre"
                              id="nombreChambre"
                              placeholder="Nombre de chambres"
                              type="number"
-
-                             [ngClass]="{'is-invalid': isForm2Submitted && form1.nombreChambre.errors}" >
-
-                      <div *ngIf="isForm2Submitted && form1.nombreChambre.errors?.required" class="invalid-feedback">
+                             [ngClass]="{'is-invalid': isForm2Submitted && form2.nombreChambre.errors}" >
+                      <div *ngIf="isForm2Submitted && form2.nombreChambre.errors?.required" class="invalid-feedback">
                         Requis
                       </div>
 
                     </div>
 
+                    <div class="form-group">
+                      <label for="nombreLit">Nombre de Lits</label>
+                      <input class="form-control"
+                             formControlName="nombreLit"
+                             id="nombreLit"
+                             name="nombreLit"
+                             placeholder="Nombre de Lits"
+                             type="number"
+                             [ngClass]="{'is-invalid': isForm2Submitted && form2.nombreLit.errors}" >
+                      <div *ngIf="isForm2Submitted && form2.nombreLit.errors?.required" class="invalid-feedback">
+                        Requis
+                      </div>
+
+                    </div>
+
+                    <div class="form-group">
+                      <label for="hasTelevision">Vous avez disposez d'une Television ?</label>
+                      <ng-select [items]="YesOrNo"
+                                 bindLabel="name"
+                                 bindValue="value"
+                                 id="hasTelevision"
+                                 formControlName="hasTelevision"
+                                 placeholder="Choisissez une option"
+                                 [ngClass]="{'is-invalid': isForm2Submitted && form2.hasTelevision.errors}"
+                                 [searchable]="false">
+                      </ng-select>
+
+                      <div *ngIf="isForm2Submitted && form2.hasTelevision.errors?.required" class="invalid-feedback">
+                        Requis
+                      </div>
+
+                    </div>
+
+                    <div class="form-group">
+                      <label for="hasChauffage">Vous avez un Chauffage ?</label>
+                      <ng-select [items]="YesOrNo"
+                                 bindLabel="name"
+                                 bindValue="value"
+                                 id="hasChauffage"
+                                 formControlName="hasChauffage"
+                                 placeholder="Choisissez une option"
+                                 [ngClass]="{'is-invalid': isForm2Submitted && form2.hasChauffage.errors}"
+                                 [searchable]="false">
+                      </ng-select>
+
+                      <div *ngIf="isForm2Submitted && form2.hasChauffage.errors?.required" class="invalid-feedback">
+                        Requis
+                      </div>
+
+                    </div>
+
+                    <div class="form-group">
+                      <label for="hasClimatiseur">Vous avez un Climatiseur ?</label>
+                      <ng-select [items]="YesOrNo"
+                                 bindLabel="name"
+                                 bindValue="value"
+                                 id="hasClimatiseur"
+                                 formControlName="hasClimatiseur"
+                                 placeholder="Choisissez une option"
+                                 [ngClass]="{'is-invalid': isForm2Submitted && form2.hasClimatiseur.errors}"
+                                 [searchable]="false">
+                      </ng-select>
+
+                      <div *ngIf="isForm2Submitted && form2.hasClimatiseur.errors?.required" class="invalid-feedback">
+                        Requis
+                      </div>
+
+                    </div>
+
+                    <div class="form-group">
+                      <label for="hasInternet">Vous avez un accès Internet ?</label>
+                      <ng-select [items]="YesOrNo"
+                                 bindLabel="name"
+                                 bindValue="value"
+                                 id="hasInternet"
+                                 formControlName="hasInternet"
+                                 placeholder="Choisissez une option"
+                                 [ngClass]="{'is-invalid': isForm2Submitted && form2.hasInternet.errors}"
+                                 [searchable]="false">
+                      </ng-select>
+
+                      <div *ngIf="isForm2Submitted && form2.hasInternet.errors?.required" class="invalid-feedback">
+                        Requis
+                      </div>
+
+                    </div>
 
                     <div class="d-flex justify-content-left mt-2">
                       <button class="btn btn-light mr-2" type="button" awPreviousStep>Back</button>
@@ -152,7 +238,6 @@
 
               </aw-wizard>
 
-              <a routerLink="/auth/login" class="d-block mt-3 text-muted">Déjà inscrit ? Se connecter</a>
 
             </div>
           </div>

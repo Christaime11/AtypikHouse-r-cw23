@@ -3,11 +3,11 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import {FormGroup, FormBuilder, Validators, FormControl} from '@angular/forms';
 import { WizardComponent as BaseWizardComponent } from 'angular-archwizard';
-
-import { PeoplesData, Person } from '../../../../core/imported-datas/peoples.data';
-import { AuthService } from 'src/app/core/auth/auth.service';
 import { DropzoneConfigInterface, DropzoneDirective } from 'ngx-dropzone-wrapper';
-import {HabitatsTypesService} from "../../../../core/habitats/habitats-types.service";
+
+import { AuthService } from 'src/app/core/auth/auth.service';
+import { HabitatsTypesService } from '../../../../core/habitats/habitats-types.service';
+import {HabitatsService} from "../../../../core/habitats/habitats.service";
 
 
 @Component({
@@ -28,7 +28,6 @@ export class AddHabitatComponent implements OnInit {
   @ViewChild(DropzoneDirective, { static: false }) directiveRef?: DropzoneDirective;
 
   files: string  []  =  [];
-  people: Person[] = [];
 
   validationForm1: FormGroup;
   validationForm2: FormGroup;
@@ -44,10 +43,13 @@ export class AddHabitatComponent implements OnInit {
 
   data: any;
   types: any;
+  YesOrNo: ({ value: number; name: string })[];
+  formData: any;
 
   constructor(
     public formBuilder: FormBuilder,
     public authService: AuthService,
+    private habitatsService : HabitatsService,
     private habitatsTypesApi: HabitatsTypesService,
     private router: Router) { }
 
@@ -62,14 +64,17 @@ export class AddHabitatComponent implements OnInit {
 
   ngOnInit(): void {
 
-    // array of objects
-    this.people = PeoplesData.peoples;
+    // simple object Yes Or No
+    this.YesOrNo = [
+      {name: 'Oui', value: 1},
+      {name: 'Non', value: 0}
+      ];
 
+    // array of habitats types
     this.habitatsTypesApi.getHabitatsTypes().subscribe(
       data => {
         this.data = data;
         this.types = this.data.typeHabitats;
-        console.log(this.types);
       });
 
     /**
@@ -88,7 +93,19 @@ export class AddHabitatComponent implements OnInit {
      * form value validation
      */
     this.validationForm2 = this.formBuilder.group({
-      nombreChambre : ['', Validators.required],
+      nombreChambre: new FormControl(1, [
+        Validators.required,
+        Validators.pattern('^[0-9]*$'),
+        Validators.min(1),
+      ]),
+      nombreLit: new FormControl(null, [
+        Validators.required,
+        Validators.pattern('^[0-9]*$')
+      ]),
+      hasTelevision: new FormControl(null, Validators.required),
+      hasChauffage: new FormControl(null, Validators.required),
+      hasInternet: new FormControl(null, Validators.required),
+      hasClimatiseur: new FormControl(null, Validators.required),
     });
 
     this.isForm1Submitted = false;
@@ -114,7 +131,6 @@ export class AddHabitatComponent implements OnInit {
    * Returns form
    */
   get form1() {
-    console.log(this.validationForm1.controls);
     return this.validationForm1.controls;
   }
 
@@ -122,6 +138,7 @@ export class AddHabitatComponent implements OnInit {
    * Returns form
    */
   get form2() {
+    console.log(this.validationForm2.controls);
     return this.validationForm2.controls;
   }
 
@@ -135,18 +152,28 @@ export class AddHabitatComponent implements OnInit {
     this.isForm1Submitted = true;
   }
 
-  /**
-   * Get values from both forms and join them together
-   */
-  getData(){
-    const merged = Object.assign(this.validationForm1.value, this.validationForm2.value);
-    console.log(merged);
-    return merged;
-  }
 
   form2Submit() {
     if(this.validationForm2.valid) {
-     this.authService.register(this.getData()).subscribe(
+
+      this.formData =  new FormData();
+      // tslint:disable-next-line:prefer-for-of
+      for (let i =  0; i <  this.files.length; i++)  {
+        this.formData.append('vues[]',  this.files[i]);
+      }
+      this.formData.append('title', this.validationForm1.get('title').value);
+      this.formData.append('description', this.validationForm1.get('description').value);
+      this.formData.append('nombreChambre', this.validationForm2.get('nombreChambre').value);
+      this.formData.append('prixParNuit', this.validationForm1.get('prixParNuit').value);
+      this.formData.append('nombreLit', this.validationForm2.get('nombreLit').value);
+      this.formData.append('adresse', this.validationForm1.get('adresse').value);
+      this.formData.append('hasTelevision', this.validationForm2.get('hasTelevision').value);
+      this.formData.append('hasChauffage', this.validationForm2.get('hasChauffage').value);
+      this.formData.append('hasInternet', this.validationForm2.get('hasInternet').value);
+      this.formData.append('hasClimatiseur', this.validationForm2.get('hasClimatiseur').value);
+      this.formData.append('typeHabitat', this.validationForm1.get('typeHabitat').value);
+
+     this.habitatsService.addHabitat(this.formData).subscribe(
         result => {
           this.success = result.success;
           this.display = false;
