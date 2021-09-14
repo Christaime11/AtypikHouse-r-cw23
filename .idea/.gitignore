@@ -2,6 +2,6 @@
 /shelf/
 /workspace.xml
 # CodeStream ignored files
-/../../NobleUI - Angular 11+ Admin Template - v1.1.1\.idea/codestream.xml
+/../../client\.idea/codestream.xml
 # Editor-based HTTP Client requests
 /httpRequests/
