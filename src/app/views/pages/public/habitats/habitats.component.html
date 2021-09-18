@@ -1,0 +1,40 @@
+<section class="mb-5 bg-animated">
+
+  <div class="container">
+
+    <div class="d-flex justify-content-center justify-content-sm-between flex-wrap align-items-center"
+         style="height:130px">
+
+      <h1 class="text-white">Les habitats</h1>
+
+    </div><!--pager-sec-details end-->
+
+  </div>
+
+</section>
+
+<div class="container">
+
+    <div class="col-md-12 p-0 d-flex flex-wrap">
+      <ng-container *ngFor="let habitat of habitats">
+        <div class="col-lg-4 col-md-4 mb-5">
+          <div class="example-1 p-card">
+            <div class="wrapper" [style.background]="'url(' + 'http://localhost:1337' + habitat.Photos[1].url + ')'">
+              <div class="date bg-animated">
+                <span class="year">{{habitat.TypeHabitat}}</span>
+              </div>
+              <div class="data">
+                <div class="content">
+                  <span class="author">{{habitat.adresse}}</span>
+                  <h3 class="title mb-3"><a href="#">{{habitat.Titre}}.</a></h3>
+                  <p class="text pb-1">{{habitat.Descrition | slice:0:120  }}...</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+
+</div>
+
