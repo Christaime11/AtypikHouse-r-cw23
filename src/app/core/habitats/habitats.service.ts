@@ -31,7 +31,7 @@ export class HabitatsService {
   protected  baseUrl: string = environment.apiURL;
 
   addUrl = this.baseUrl + 'habitats/add';
-  getAllUrl = this.baseUrl + 'habitats';
+  getAllUrl = this.baseUrl + 'habitats/getAll';
   getOne = this.baseUrl +  'habitats/getDetails/';
   askAddUrl = this.baseUrl + 'users/askAuthorizationToAddHabitat';
   getUserReservationsUrl = this.baseUrl + 'habitats/reservations/allUsersReservations';

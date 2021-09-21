@@ -16,7 +16,7 @@
 <div class="container">
 
     <div class="col-md-12 p-0 d-flex flex-wrap">
-      <ng-container *ngFor="let habitat of habitats">
+     <!-- <ng-container *ngFor="let habitat of habitats">
         <div class="col-lg-4 col-md-4 mb-5">
           <div class="example-1 p-card">
             <div class="wrapper" [style.background]="'url(' + 'http://localhost:1337' + habitat.Photos[1].url + ')'">
@@ -28,6 +28,25 @@
                   <span class="author">{{habitat.adresse}}</span>
                   <h3 class="title mb-3"><a href="#">{{habitat.Titre}}.</a></h3>
                   <p class="text pb-1">{{habitat.Descrition | slice:0:120  }}...</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-container>-->
+
+      <ng-container *ngFor="let habitat of habitats">
+        <div class="col-lg-4 col-md-4 mb-5">
+          <div class="example-1 p-card">
+            <div class="wrapper" [style.background]="'url(' + 'http://127.0.0.1:8000/storage/' + habitat.vues[1].lienImage + ')'">
+              <div class="date bg-animated">
+                <span class="year">{{habitat.typeHabitat}}</span>
+              </div>
+              <div class="data">
+                <div class="content">
+                  <span class="author">{{habitat.adresse}}</span>
+                  <h3 class="title mb-3"><a href="#">{{habitat.title}}.</a></h3>
+                  <p class="text pb-1">{{habitat.description | slice:0:120  }}...</p>
                 </div>
               </div>
             </div>

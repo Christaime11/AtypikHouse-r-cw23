@@ -20,12 +20,16 @@ export class HabitatsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-
-    axios.get('http://localhost:1337/habitats').then(
+    this.habitatsService.getAll().subscribe(
+      data => {
+        this.data = data;
+        this.habitats = this.data.habitats;
+      });
+    /*axios.get('http://localhost:1337/habitats').then(
       response => {
       console.log(response);
         this.habitats = response.data;
-    });
+    });*/
   }
 
 }

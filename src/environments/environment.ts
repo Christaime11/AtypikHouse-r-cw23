@@ -2,14 +2,24 @@
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
+
 export const environment = {
   production: false,
-  apiURL: 'http://localhost:1337/',
-  loginApiURL : 'http://localhost:1337/login',
-  registerApiUrl: 'http://localhost:1337/register',
+  apiURL: 'http://localhost:8000/api/',
+  loginApiURL : 'http://localhost:8000/api/login',
+  registerApiUrl: 'http://localhost:8000/api/register',
 };
 
-/*
+
+/*export const environment = {
+  production: false,
+  apiURL: 'https://surutile.com/atypikhouse/laravel/public/api/',
+  loginApiURL : 'https://surutile.com/atypikhouse/laravel/public/api/login',
+  registerApiUrl: 'https://surutile.com/atypikhouse/laravel/public/api/register',
+};*/
+
+
+/* https://surutile.com/atypikhouse/laravel/public/
  * For easier debugging in development mode, you can import the following file
  * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.
  *

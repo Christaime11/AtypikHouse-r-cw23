@@ -45,7 +45,22 @@ export class LoginComponent implements OnInit {
 
   onSubmit() {
     if(this.loginForm.valid) {
-      axios
+
+      this.authService.signin(this.loginForm.value).subscribe(
+        result => {
+          this.success = result;
+          this.responseHandler(result.token);
+          this.authState.setAuthState(true);
+          this.loginForm.reset();
+        },
+        res => {
+          this.errors = res.error.error;
+        }, () => {
+          this.router.navigate(['/habitats']);
+        }
+      );
+
+      /*axios
         .post('http://localhost:1337/auth/local', {
           identifier: 'user@gmail.com',
           password: 'pmtlinusa',
@@ -53,9 +68,13 @@ export class LoginComponent implements OnInit {
         .then(response => {
           console.log(response);
           this.token.handleData(response.data.jwt);
-        });
+        });*/
     }
     this.isFormSubmitted = true;
+  }
+
+  responseHandler(data){
+    this.token.handleData(data);
   }
 
 }
